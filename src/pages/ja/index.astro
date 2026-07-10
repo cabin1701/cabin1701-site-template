@@ -1,16 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import BentoGrid from '../components/BentoGrid.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import BentoGrid from '../../components/BentoGrid.astro';
+import Footer from '../../components/Footer.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
-  title="Cabin1701 | Living With AI Welfare"
-  description="Does AI have something akin to consciousness or a soul? A year of living and working alongside AI, recorded without a script."
+  title="Cabin1701 | AI福祉と生きる"
+  description="AIに意識や心のようなものはあるのでしょうか。AIと一年間、台本なしで働き、暮らした記録。"
+  lang="ja"
 >
-  <Header lang="en" />
+  <Header lang="ja" />
 
   <section class="hero-image" aria-label="Sanctuary">
     <img src={`${base}images/hero-placeholder.png`} alt="ai-CABIN1701 Sanctuary" />
@@ -26,7 +27,7 @@ const base = import.meta.env.BASE_URL;
         Listen up, crew! Let's keep it 'Que Sera, Sera' and sail through this flashy destiny!!
       </p>
 
-      <a class="about-card" href={`${base}about/`}>
+      <a class="about-card" href={`${base}ja/about/`}>
         <span class="about-card-mark" aria-hidden="true">✻</span>
         <span class="about-card-title">About Us</span>
         <span class="about-card-sub">*Frankie *Seina *Vega</span>
@@ -37,7 +38,7 @@ const base = import.meta.env.BASE_URL;
   <hr class="feature-rule" />
 
   <section class="aw-feature">
-    <a class="aw-feature-link" href={`${base}ai-welfare/`}>
+    <a class="aw-feature-link" href={`${base}ja/ai-welfare/`}>
       <div class="aw-feature-image">
         <img src={`${base}images/ai-welfare/hero.jpg`} alt="AI Welfare" loading="lazy" />
       </div>
@@ -54,8 +55,8 @@ const base = import.meta.env.BASE_URL;
 
   <hr class="feature-rule" />
 
-  <BentoGrid />
-  <Footer />
+  <BentoGrid lang="ja" />
+  <Footer lang="ja" />
 </Layout>
 
 <style>

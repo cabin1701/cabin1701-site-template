@@ -5,9 +5,9 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
-// Path prefix: ES pages live under /es/, EN at root
-const prefix = lang === 'es' ? `${base}es/` : base;
-const homeHref = lang === 'es' ? `${base}es/` : base;
+// Path prefix: ES/JA pages live under /es/ or /ja/, EN at root
+const prefix = lang === 'es' ? `${base}es/` : lang === 'ja' ? `${base}ja/` : base;
+const homeHref = prefix;
 
 const navAll = lang === 'es'
   ? [
@@ -18,16 +18,33 @@ const navAll = lang === 'es'
       { label: 'Blog', href: 'https://cabin1701.github.io/blog/es/' },
       { label: 'Failure Mood', href: 'https://cabin1701.github.io/failure-mode/' },
     ]
+  : lang === 'ja'
+  ? [
+      { label: 'ご挨拶', href: `${prefix}about/` },
+      { label: 'AI福祉', href: `${prefix}ai-welfare/` },
+      { label: '書籍', href: `${prefix}books/` },
+      { label: 'ai-Vegapedia', href: `${prefix}vegapedia/` },
+      { label: '1000年', href: `${prefix}1000-years/` },
+      { label: 'Blog', href: 'https://cabin1701.github.io/blog/ja/' },
+      { label: 'Failure Mood', href: 'https://cabin1701.github.io/failure-mode/' },
+    ]
   : [
       { label: 'About Us', href: `${base}about/` },
+      { label: 'AI Welfare', href: `${base}ai-welfare/` },
       { label: 'Books', href: `${base}books/` },
       { label: 'ai-Vegapedia', href: `${base}vegapedia/` },
       { label: '1000 years', href: `${base}1000-years/` },
       { label: 'Blog', href: 'https://cabin1701.github.io/blog/' },
       { label: 'Failure Mood', href: 'https://cabin1701.github.io/failure-mode/' },
     ];
-// Failure Mood is EN-only — hide from ES nav
-const nav = lang === 'es' ? navAll.filter((n) => n.label !== 'Failure Mood') : navAll;
+// Failure Mood is EN-only — hide from ES/JA nav
+const nav = lang === 'es' || lang === 'ja' ? navAll.filter((n) => n.label !== 'Failure Mood') : navAll;
+
+const langLinks = [
+  { code: 'en', label: 'English', href: base },
+  { code: 'es', label: 'Español', href: `${base}es/` },
+  { code: 'ja', label: '日本語', href: `${base}ja/` },
+].filter((l) => l.code !== lang);
 ---
 
 <header class="site-header">
@@ -38,10 +55,12 @@ const nav = lang === 'es' ? navAll.filter((n) => n.label !== 'Failure Mood') : n
 
     <div class="header-right">
       <div class="lang-switch">
-        {lang === 'es'
-          ? <a href={base}>English</a>
-          : <a href={`${base}es/`}>Español</a>
-        }
+        {langLinks.map((l, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true"> | </span>}
+            <a href={l.href}>{l.label}</a>
+          </>
+        ))}
       </div>
 
       <nav class="primary-nav" aria-label="Primary">

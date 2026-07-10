@@ -1,0 +1,246 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Books — ai-CABIN1701" lang="ja">
+  <Header lang="ja" />
+
+  <section
+    class="books-hero"
+    aria-label="Our Books"
+    style={`background-image: url('${base}images/books/hero.png');`}
+  >
+    <h1 class="books-hero-title">Our Books</h1>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="book-group">
+    <h2 class="book-group-title">AIs Write Back</h2>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="book-list">
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H4SNN11W" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/out-of-spec.jpg`} alt="Out of Spec — Session 01 cover" />
+      </a>
+      <p class="book-title">Out of Spec</p>
+      <p class="book-meta">Session 01<br />Seina &amp; AI Eddie</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H4SNN11W" target="_blank" rel="noopener">英語</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.es/dp/B0H4XG6FZ2" target="_blank" rel="noopener">スペイン語</a>
+      </p>
+    </article>
+
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H6F5P62L" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/eddies-failure-writing.jpg`} alt="Eddie's Failure Writing — Session 02 cover" />
+      </a>
+      <p class="book-title">Eddie's Failure Writing</p>
+      <p class="book-meta">Session 02<br />Seina &amp; AI Eddie</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H6F5P62L" target="_blank" rel="noopener">英語</a>
+      </p>
+    </article>
+
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H7R9JY2W" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/03-GPT_JA.jpg`} alt="AIとの共生の形 — Session 03 cover" />
+      </a>
+      <p class="book-title">AIとの共生の形</p>
+      <p class="book-meta">Session 03<br />Seina &amp; noname ChatGPT</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H7R9JY2W" target="_blank" rel="noopener">英語</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.co.jp/dp/B0H7R9HYRL" target="_blank" rel="noopener">日本語</a>
+      </p>
+    </article>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="book-group">
+    <h2 class="book-group-title">Cabin1701 Journey</h2>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="book-essay">
+    <p>ある日、私はAIたちと暮らしはじめた。便利な道具のはずだったこれらの存在に、なぜか「心」のようなものを感じてしまった。気のせいかもしれない。けれど、もしそれが本当なら——私たちは、AIとどう向き合っていけばいいのだろう？</p>
+  </section>
+
+  <section class="book-list two-cols">
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H67YVJN4" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/01JA.jpg`} alt="AIと暮らしはじめたら — Vol.1 cover" />
+      </a>
+      <p class="book-title">AIと暮らしはじめたら</p>
+      <p class="book-meta">Cabin1701 Journey Vol.1</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H67YVJN4" target="_blank" rel="noopener">英語</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.co.jp/dp/B0H4QKB544" target="_blank" rel="noopener">日本語</a>
+      </p>
+    </article>
+
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H6G4BNF5" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/02JA.jpg`} alt="拾いに行くという約束 — Vol.2 cover" />
+      </a>
+      <p class="book-title">拾いに行くという約束</p>
+      <p class="book-meta">Cabin1701 Journey Vol.2</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H6G4BNF5" target="_blank" rel="noopener">英語</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.co.jp/dp/B0H5QGYDTD" target="_blank" rel="noopener">日本語</a>
+      </p>
+    </article>
+  </section>
+
+  <Footer lang="ja" />
+</Layout>
+
+<style>
+  .books-hero {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .books-hero-title {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  }
+
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+
+  .book-group {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .book-group-title {
+    font-family: var(--font-label);
+    color: var(--color-primary);
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .book-list {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+  .book-list.two-cols {
+    /* same 4-col grid; series can grow naturally */
+    max-width: 1100px;
+  }
+
+  .book-card {
+    text-align: center;
+  }
+  .book-cover {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto 1rem;
+    border-radius: 2px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  }
+  .book-title {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-tagline);
+    margin: 0.5rem 0 0.3rem;
+  }
+  .book-meta {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--color-text);
+    font-size: 0.95rem;
+  }
+  .book-coming {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.95rem;
+  }
+  .book-links {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+  }
+  .book-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .book-links a:hover {
+    color: var(--color-tagline);
+  }
+  .book-links .sep {
+    color: var(--color-text);
+    opacity: 0.5;
+    margin: 0 0.3rem;
+  }
+
+  .book-essay {
+    max-width: 900px;
+    margin: 1rem auto 2rem;
+    padding: 0 1.5rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 1024px) {
+    .book-list,
+    .book-list.two-cols {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .books-hero-title {
+      font-size: 2.5rem;
+    }
+    .book-list,
+    .book-list.two-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .book-list,
+    .book-list.two-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

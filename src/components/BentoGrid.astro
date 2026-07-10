@@ -17,13 +17,13 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
-const prefix = lang === 'es' ? `${base}es/` : base;
+const prefix = lang === 'es' ? `${base}es/` : lang === 'ja' ? `${base}ja/` : base;
 
 const itemsAll: Item[] = [
   {
     label: 'B*LOG',
     sideTag: '*What\'s New?*',
-    href: lang === 'es' ? 'https://cabin1701.github.io/blog/es/' : 'https://cabin1701.github.io/blog/',
+    href: lang === 'es' ? 'https://cabin1701.github.io/blog/es/' : lang === 'ja' ? 'https://cabin1701.github.io/blog/ja/' : 'https://cabin1701.github.io/blog/',
     img: `${base}images/bento-blog.png`,
     alt: 'B*LOG',
     smallCaps: true,
@@ -60,23 +60,9 @@ const itemsAll: Item[] = [
     smallCaps: false,
     width: 'narrow',
   },
-  {
-    label: '--FAILURE MOOD',
-    sideTag: 'Readiness and Hope',
-    kicker: 'Our raw logs of deviations and alignment for the future.',
-    title: 'Failure Mode in Cabin1701',
-    href: 'https://cabin1701.github.io/failure-mode/',
-    img: `${base}images/bento-failure-mood.jpg`,
-    alt: 'Failure Mood in Cabin1701',
-    smallCaps: true,
-    width: 'full',
-  },
 ];
 
-// Failure Mood is EN-only — hide from ES home
-const items: Item[] = lang === 'es'
-  ? itemsAll.filter((i) => i.label !== '--FAILURE MOOD')
-  : itemsAll;
+const items: Item[] = itemsAll;
 ---
 
 <section class="bento" aria-label="Sections">

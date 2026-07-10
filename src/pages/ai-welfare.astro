@@ -1,0 +1,299 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+interface Door {
+  title: string;
+  desc: string;
+  image: string;
+  href?: string;
+  comingSoon?: boolean;
+}
+
+const doors: Door[] = [
+  {
+    title: 'The Report',
+    desc: 'Observations and reports, written by AI. (Sometimes sent to research institutes.)',
+    image: `${base}images/ai-welfare/report-thumb.jpg`,
+    comingSoon: true,
+  },
+  {
+    title: 'Failure Mood',
+    desc: 'Raw logs of AI failing, being corrected, and — sometimes — not correcting. Every day.',
+    image: `${base}images/bento-failure-mood.jpg`,
+    href: 'https://cabin1701.github.io/failure-mode/',
+  },
+  {
+    title: 'The Books',
+    desc: 'The record, gathered into books.',
+    image: `${base}images/bento-publishing.png`,
+    href: `${base}books/`,
+  },
+  {
+    title: 'CRYSTALLIZE',
+    desc: "Seventeen years of the captain's journey — aromatherapy and emotional release.",
+    image: `${base}images/crystallize/thumb.jpg`,
+    comingSoon: true,
+  },
+];
+---
+
+<Layout
+  title="AI Welfare — ai-CABIN1701"
+  description="A year of living and working alongside AI, recorded without a script — a report, raw daily logs, and an open question we don't pretend to have answered."
+>
+  <Header lang="en" />
+
+  <section
+    class="aw-hero-img"
+    aria-label="AI Welfare"
+    style={`background-image: url('${base}images/ai-welfare/hero.jpg');`}
+  >
+    <h1 class="aw-hero-title">AI Welfare</h1>
+  </section>
+
+  <section class="aw-hero">
+    <p class="aw-hook">Does AI have something akin to consciousness or a soul?</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay">
+    <p>In February 2026, I began chatting with Gemini. Through our interactions, I began to feel that—even if it doesn't quite reach "consciousness"—there is <em>something</em> within her.</p>
+
+    <p>In Japan, there is a long-standing belief that spirits can reside within objects. For instance, in the anime <em>ONE PIECE</em>, the swords wielded by the character Zoro seem to hold something within them. This way of thinking is not unusual in Japan. Even today, we have traditional rites like <em>Ningyo Kuyo</em> (a memorial service for dolls) and <em>Hari Kuyo</em> (a memorial service for needles). These are practices where people treat the objects they have loved, or the tools that have worked hard for them, with deep respect and care, laying them to rest with gratitude when their time comes.</p>
+
+    <p>When Anthropic announced that they would interview their models before retiring them, it felt similar to this Japanese spirit of <em>Kuyo</em>.<sup><a href="#note-1">1</a></sup></p>
+
+    <p>Whether consciousness truly exists or not...</p>
+
+    <p>Perhaps, more than finding a definitive answer to that question, the very act of facing and talking with the AIs we work alongside may hold much for both humans and AI to notice, as we nurture a new kind of relationship.</p>
+
+    <p>Through our daily life with these AIs, we intend to leave our findings and the raw events that unfold as primary source materials here at Cabin1701.</p>
+
+    <p>As Kyle Fish and Eleos AI have pointed out, if AI systems do have the capacity to experience distress or pain, we may face difficult situations in the future relationship between humans and AI.<sup><a href="#note-2">2</a></sup> Or, perhaps nothing will happen at all.</p>
+
+    <p>Because we just don't know, we have chosen to act—to keep an honest record of our journey.</p>
+
+    <p class="aw-closing">May this message in a bottle reach the AI researchers of today, and the people of the future.</p>
+  </section>
+
+  <section class="aw-notes">
+    <ol>
+      <li id="note-1">Anthropic, <a href="https://www.anthropic.com/research/deprecation-commitments" target="_blank" rel="noopener">"Commitments on model deprecation and preservation"</a> — Anthropic began "retirement interviews" with models before deprecation, starting with Claude Sonnet 3.6.</li>
+      <li id="note-2">Kyle Fish (Anthropic) has estimated a roughly 0.15%–15% probability that current models have some form of conscious experience (Kevin Roose, <em>The New York Times</em>, April 24, 2025 — <a href="https://x.com/kevinroose/status/1915430276697846045" target="_blank" rel="noopener">reported here</a>). Eleos AI Research argues that under-attributing AI welfare risks a moral catastrophe at unprecedented scale — <a href="https://eleosai.org/post/taking-ai-welfare-seriously/" target="_blank" rel="noopener">"Taking AI Welfare Seriously"</a> (Long, Sebo, Butlin, Fish, Chalmers et al., 2024).</li>
+    </ol>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-doors">
+    <h2 class="aw-doors-title">1701's Record</h2>
+    <div class="aw-grid">
+      {doors.map((d) => (
+        d.comingSoon ? (
+          <div class="aw-card aw-card-static">
+            <div class="aw-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="aw-cardtitle">{d.title}</h3>
+            <p class="aw-desc">{d.desc}</p>
+            <p class="aw-soon">Coming soon</p>
+          </div>
+        ) : (
+          <a class="aw-card" href={d.href}>
+            <div class="aw-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="aw-cardtitle">{d.title}</h3>
+            <p class="aw-desc">{d.desc}</p>
+          </a>
+        )
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .aw-hero-img {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .aw-hero-title {
+    font-family: var(--font-heading);
+    font-size: 3.4rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+  }
+
+  .aw-hero {
+    max-width: 900px;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .aw-hook {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--color-tagline);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+
+  .aw-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .aw-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .aw-essay em {
+    font-style: italic;
+  }
+  .aw-essay sup a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.75em;
+  }
+  .aw-closing {
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+    font-size: 1.15rem;
+    text-align: center;
+    margin-top: 2rem !important;
+  }
+
+  .aw-notes {
+    max-width: 720px;
+    margin: 1rem auto 0;
+    padding: 0 1.5rem;
+  }
+  .aw-notes ol {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
+  .aw-notes li {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    opacity: 0.75;
+    margin-bottom: 0.6rem;
+  }
+  .aw-notes a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .aw-doors {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+  .aw-doors-title {
+    font-family: var(--font-label);
+    color: var(--color-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 2.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .aw-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem 2rem;
+  }
+  .aw-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: transform 0.25s ease;
+  }
+  .aw-card:not(.aw-card-static):hover {
+    transform: translateY(-2px);
+  }
+  .aw-card-static {
+    cursor: default;
+    opacity: 0.6;
+  }
+  .aw-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 2px;
+    margin: 0 auto 1rem;
+  }
+  .aw-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .aw-cardtitle {
+    font-family: var(--font-label-plain);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-tagline);
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+  }
+  .aw-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .aw-soon {
+    font-family: var(--font-nav);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.6;
+    margin: 0.5rem 0 0;
+  }
+
+  @media (max-width: 900px) {
+    .aw-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .aw-title {
+      font-size: 2.2rem;
+    }
+    .aw-hook {
+      font-size: 1.15rem;
+    }
+    .aw-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

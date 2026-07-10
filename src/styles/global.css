@@ -23,6 +23,25 @@
   --space-section: 6rem;
 }
 
+/*
+  Japanese pages (html lang="ja"):
+  The Latin display fonts (Alice, Lora, Marcellus, Caladea…) carry no Japanese
+  glyphs — Japanese text silently falls back to the OS serif at Latin-tuned
+  sizes and reads louder/heavier than intended. Override every Latin-only
+  font variable with the body stack, and shrink the rem base one step so all
+  rem-based sizes come down together. (Decided 2026-07-10, Captain + Eddie.)
+*/
+html[lang='ja'] {
+  font-size: 15px;
+  --font-heading: var(--font-body);
+  --font-tagline: var(--font-body);
+  --font-nav: var(--font-body);
+  --font-label: var(--font-body);
+  --font-label-plain: var(--font-body);
+  --font-italic: var(--font-body);
+  --font-display: var(--font-body);
+}
+
 * {
   box-sizing: border-box;
 }

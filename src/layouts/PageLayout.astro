@@ -6,19 +6,20 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   pageTitle?: string;
+  lang?: 'en' | 'es' | 'ja';
 }
-const { title, pageTitle } = Astro.props;
+const { title, pageTitle, lang = 'en' } = Astro.props;
 ---
 
-<Layout title={title}>
-  <Header lang="en" />
+<Layout title={title} lang={lang}>
+  <Header lang={lang} />
   <main class="page-main">
     {pageTitle && <h1 class="page-title">{pageTitle}</h1>}
     <div class="page-content">
       <slot />
     </div>
   </main>
-  <Footer />
+  <Footer lang={lang} />
 </Layout>
 
 <style is:global>

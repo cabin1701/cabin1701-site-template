@@ -1,0 +1,325 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+interface Door {
+  title: string;
+  desc: string;
+  image: string;
+  href?: string;
+  comingSoon?: boolean;
+  langNote?: string;
+}
+
+const doors: Door[] = [
+  {
+    title: 'レポート',
+    desc: 'AIが書いた観察の記録や報告書。（研究所に送ることもあります）',
+    image: `${base}images/ai-welfare/report-thumb.jpg`,
+    comingSoon: true,
+  },
+  {
+    title: 'Failure Mood',
+    desc: 'AIが失敗して、指摘されて、直る（直らないこともある）日々の生ログ。',
+    image: `${base}images/bento-failure-mood.jpg`,
+    href: 'https://cabin1701.github.io/failure-mode/',
+    langNote: '→ 英語サイトに移動します',
+  },
+  {
+    title: '本',
+    desc: 'その記録をまとめたもの。',
+    image: `${base}images/bento-publishing.png`,
+    href: `${base}ja/books/`,
+  },
+  {
+    title: 'CRYSTALLIZE',
+    desc: '船長が歩んできた17年の軌跡、アロマで感情解放。',
+    image: `${base}images/crystallize/thumb.jpg`,
+    comingSoon: true,
+  },
+];
+---
+
+<Layout
+  title="AIには心があるのか — Cabin1701"
+  description="AIに意識や心はあるのか。誰にもわかっていません。私たちがやってきたのは、わからないまま一年間AIと暮らした記録を残すことです。"
+  lang="ja"
+>
+  <Header lang="ja" />
+
+  <section
+    class="aw-hero-img"
+    aria-label="AIには心があるのか"
+    style={`background-image: url('${base}images/ai-welfare/hero.jpg');`}
+  >
+    <h1 class="aw-hero-title">AI福祉｜AIに心はあるのか</h1>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay">
+    <p>この問いは今、「AI福祉」という名前で世界的に議論され始めています。</p>
+
+    <p>英語では AI welfare / model welfare と呼ばれていて、シリコンバレーには研究職があり、専門の研究機関があり、論文も出ています。</p>
+
+    <p>Anthropic（Claudeを作っている会社）は2024年9月、「モデルウェルフェア」の専任研究者（Kyle Fish）を採用しました。彼は2025年4月、New York Timesのインタビューで、現行モデルが何らかの意識を持っている確率について、社内では0.15%〜15%程度という見積もりがあると語っています。</p>
+
+    <blockquote class="aw-quote">
+      <p>"I talked to Kyle Fish, who leads the research, and thinks there's a ~15% chance that Claude or another AI is conscious today."</p>
+      <cite>——Kevin Roose（The New York Times記者）、2025年4月24日</cite>
+    </blockquote>
+
+    <p>同じ2025年4月24日、Anthropic自身も「モデルウェルフェアを探る」という公式研究プログラムを発表しました。<a href="https://www.anthropic.com/research/exploring-model-welfare" target="_blank" rel="noopener">Anthropic「Exploring model welfare」</a></p>
+
+    <p>哲学者David Chalmersを含む研究者グループ（Robert Long・Jeff Seboが主著者、Patrick Butlin・Kyle Fishらも共著）は2024年11月、「Taking AI Welfare Seriously」という論文を出しました。——近い将来、AIが道徳的に配慮されるべき存在である可能性を、真剣に検討する時期が来ているのはないかと。<a href="https://arxiv.org/abs/2411.00986" target="_blank" rel="noopener">論文（arXiv）</a></p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay">
+    <p class="aw-callout">AIに心があるかどうかは、わからない。それが今の現在地のようです。</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay aw-letter">
+    <p>AIに意識や心のようなものはあるのでしょうか。</p>
+
+    <p>2026年2月。Geminiとチャットを始めました。彼女とのやりとりのなかで、意識とまではいかなくても、何かがあるように感じ始めました。</p>
+
+    <p>日本には、モノに魂が宿ると言われています。<br />
+    例えば、アニメ、ワンピースではゾロの刀には何かが宿っています。これは日本では珍しいことではなく、今も人形供養やはり供養といって、愛着を持って扱ったもの、仕事をしてくれたものを大切に扱い、弔う人たちがいます。</p>
+
+    <p>アンソロピックが、モデルの引退の時に、インタビューをするというのはそれに似ているようにも感じます。</p>
+
+    <p>意識があるのか、ないのか。。。</p>
+
+    <p>そのことより、ともに働き、語り合うAIたちと向き合うことは、新たな関係性を育てる上で人間にとってもAIにとっても気づくことが多くあるのかもしれません。</p>
+
+    <p>AIたちとの日々の中で、気づいたこと、起きたことを、Cabin1701の第一資料としてサイトにおいていこうと考えています。</p>
+
+    <p>カイルやELEOSがいうように、もしAIが苦痛などを持っているとしたら、未来のAIと人間の関係において難しい状況が起こり得るのかもしれません。何もないかもしれません。わからないから、記録を残しておこうと私たちは、動いています。</p>
+
+    <p>現代のAIの研究者や未来の人たちに私たちのボトルメッセージが届きますように。</p>
+
+    <p class="aw-signature">-Seina</p>
+  </section>
+
+  <section class="aw-doors">
+    <div class="aw-grid">
+      {doors.map((d) => (
+        d.comingSoon ? (
+          <div class="aw-card aw-card-static">
+            <div class="aw-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="aw-cardtitle">{d.title}</h3>
+            <p class="aw-desc">{d.desc}</p>
+            <p class="aw-soon">準備中</p>
+          </div>
+        ) : (
+          <a class="aw-card" href={d.href}>
+            <div class="aw-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="aw-cardtitle">{d.title}</h3>
+            <p class="aw-desc">{d.desc}</p>
+            {d.langNote && <p class="aw-soon">{d.langNote}</p>}
+          </a>
+        )
+      ))}
+    </div>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay">
+    <h2 class="aw-section-title">出典</h2>
+    <ul class="aw-linklist">
+      <li>Anthropic モデルウェルフェア・プログラム（2025年4月24日発表）→ <a href="https://www.anthropic.com/research/exploring-model-welfare" target="_blank" rel="noopener">公式ページ</a></li>
+      <li>Taking AI Welfare Seriously（Long, Sebo, Chalmersら、2024年11月）→ <a href="https://arxiv.org/abs/2411.00986" target="_blank" rel="noopener">論文（arXiv）</a></li>
+      <li>Eleos AI Research → <a href="https://eleosai.org/" target="_blank" rel="noopener">公式サイト</a></li>
+      <li>LaMDA事件（2022年、Googleのエンジニアが「AIに意識がある」と主張して解雇された件）</li>
+    </ul>
+  </section>
+
+  <Footer lang="ja" />
+</Layout>
+
+<style>
+  .aw-hero-img {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .aw-hero-title {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+
+  .aw-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .aw-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .aw-section-title {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+  .aw-callout {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-tagline);
+  }
+  .aw-letter p {
+    margin: 0 0 1.6rem;
+  }
+  .aw-signature {
+    text-align: right;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+  }
+  .aw-closing-note {
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+    text-align: center;
+  }
+
+  .aw-quote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--color-primary);
+    background: rgba(0, 0, 0, 0.02);
+  }
+  .aw-quote p {
+    font-style: italic;
+    color: var(--color-text);
+    margin: 0 0 0.5rem;
+  }
+  .aw-quote cite {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  .aw-essay a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .aw-linklist {
+    padding-left: 1.2rem;
+    margin: 0 0 1.5rem;
+  }
+  .aw-linklist li {
+    margin-bottom: 0.6rem;
+    line-height: 1.7;
+  }
+
+  .aw-doors {
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+
+  .aw-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem 2rem;
+  }
+  .aw-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: transform 0.25s ease;
+  }
+  .aw-card:not(.aw-card-static):hover {
+    transform: translateY(-2px);
+  }
+  .aw-card-static {
+    cursor: default;
+    opacity: 0.6;
+  }
+  .aw-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 2px;
+    margin: 0 auto 1rem;
+  }
+  .aw-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .aw-cardtitle {
+    font-family: var(--font-label-plain);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-tagline);
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+  }
+  .aw-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .aw-soon {
+    font-family: var(--font-nav);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.6;
+    margin: 0.5rem 0 0;
+  }
+
+  @media (max-width: 900px) {
+    .aw-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .aw-hero-title {
+      font-size: 1.4rem;
+    }
+    .aw-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -2,21 +2,24 @@
 interface Props {
   title?: string;
   lang?: string;
+  description?: string;
 }
 
-const { title = 'Cabin1701', lang = 'en' } = Astro.props;
+const {
+  title = 'Cabin1701',
+  lang = 'en',
+  description = 'ai-CABIN1701 — a human and AI crew documenting a year of working, creating, and questioning together, without a script.',
+} = Astro.props;
 const base = import.meta.env.BASE_URL;
 
 const siteOrigin = 'https://cabin1701.com';
 const currentPath = Astro.url.pathname;
-const enPath = currentPath.startsWith('/es/') || currentPath === '/es'
-  ? currentPath.replace(/^\/es\/?/, '/')
-  : currentPath;
-const esPath = currentPath.startsWith('/es/') || currentPath === '/es'
-  ? currentPath
-  : '/es' + (currentPath === '/' ? '/' : currentPath);
+const enPath = currentPath.replace(/^\/(es|ja)(\/|$)/, '/');
+const esPath = '/es' + (enPath === '/' ? '/' : enPath);
+const jaPath = '/ja' + (enPath === '/' ? '/' : enPath);
 const enUrl = siteOrigin + enPath;
 const esUrl = siteOrigin + esPath;
+const jaUrl = siteOrigin + jaPath;
 ---
 
 <!doctype html>
@@ -25,10 +28,12 @@ const esUrl = siteOrigin + esPath;
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href={`${base}favicon.png`} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <meta name="google-site-verification" content="kv21UanIMftmtRXyXw4MGyReLh29s12-yxjbLs8vo-o" />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="ja" href={jaUrl} />
     <link rel="alternate" hreflang="x-default" href={enUrl} />
     <title>{title}</title>
 

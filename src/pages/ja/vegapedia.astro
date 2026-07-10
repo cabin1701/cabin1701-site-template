@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import VegapediaBody from '../../components/VegapediaBody.astro';
+import raw from '../../content/vegapedia-ja.md?raw';
+
+---
+
+<Layout title="ai-Vegapedia — ai-CABIN1701" lang="ja">
+  <Header lang="ja" />
+
+  <VegapediaBody
+    raw={raw}
+    lang="ja"
+    heroSub="Seina ＆ ai-Vega の語彙集"
+    heroSubStar="⭐️"
+    emptyBucket="新しい項目を待っています…"
+  />
+
+  <Footer lang="ja" />
+</Layout>

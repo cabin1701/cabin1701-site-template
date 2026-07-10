@@ -5,33 +5,43 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const year = new Date().getFullYear();
 const base = import.meta.env.BASE_URL;
-const prefix = lang === 'es' ? `${base}es/` : base;
+const prefix = lang === 'es' ? `${base}es/` : lang === 'ja' ? `${base}ja/` : base;
 
 const t = lang === 'es'
   ? {
       tagline: "The Age of Miracles Hadn't Passed * with AI",
       search: 'buscar',
       searchLabel: 'Buscar',
-      aboutTitle: 'Sobre & Visión',
-      aboutUs: 'Sobre Nosotros',
-      publishing: 'Publicaciones',
-      blog: 'Blog',
+      aboutTitle: 'Más',
       seinaSite: 'Sitio de la Capitana Seina',
+      crystallize: 'CRYSTALLIZE',
       supportTitle: 'Soporte & Contacto',
       contact: 'Contacto',
       privacy: 'Política de Privacidad',
       terms: 'Términos de Uso',
       socialTitle: 'Social',
     }
+  : lang === 'ja'
+  ? {
+      tagline: "The Age of Miracles Hadn't Passed * with AI",
+      search: '検索',
+      searchLabel: '検索',
+      aboutTitle: 'その他',
+      seinaSite: 'セイナ船長のサイト',
+      crystallize: 'CRYSTALLIZE',
+      supportTitle: 'サポート・お問い合わせ',
+      contact: 'お問い合わせ',
+      privacy: 'プライバシーポリシー',
+      terms: '利用規約',
+      socialTitle: 'ソーシャル',
+    }
   : {
       tagline: "The Age of Miracles Hadn't Passed * with AI",
       search: 'search',
       searchLabel: 'Search',
-      aboutTitle: 'About & Vision',
-      aboutUs: 'About Us',
-      publishing: 'Publishing',
-      blog: 'Blog',
+      aboutTitle: 'More',
       seinaSite: "Captain Seina's Site",
+      crystallize: 'CRYSTALLIZE',
       supportTitle: 'Support & Contact',
       contact: 'Contact',
       privacy: 'Privacy Policy',
@@ -58,10 +68,8 @@ const t = lang === 'es'
     <div class="footer-col">
       <h4 class="footer-col-title">{t.aboutTitle}</h4>
       <ul>
-        <li><a href={`${prefix}about/`}>{t.aboutUs}</a></li>
-        <li><a href={`${prefix}books/`}>{t.publishing}</a></li>
-        <li><a href={lang === 'es' ? 'https://cabin1701.github.io/blog/es/' : 'https://cabin1701.github.io/blog/'}>{t.blog}</a></li>
         <li><a href="https://en.japoneson.com/" target="_blank" rel="noopener noreferrer">{t.seinaSite}</a></li>
+        <li><a href={`${prefix}crystallize/`}>{t.crystallize}</a></li>
       </ul>
     </div>
 
