@@ -33,7 +33,7 @@
 */
 html[lang='ja'] {
   font-size: 15px;
-  --font-heading: var(--font-body);
+  --font-heading: 'Shippori Mincho', 'Alice', Georgia, serif;
   --font-tagline: var(--font-body);
   --font-nav: var(--font-body);
   --font-label: var(--font-body);
