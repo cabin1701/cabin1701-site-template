@@ -6,6 +6,11 @@ const { lang = 'en' } = Astro.props;
 const year = new Date().getFullYear();
 const base = import.meta.env.BASE_URL;
 const prefix = lang === 'es' ? `${base}es/` : lang === 'ja' ? `${base}ja/` : base;
+const searchHref = lang === 'es'
+  ? 'https://cabin1701.github.io/blog/es/search/'
+  : lang === 'ja'
+  ? 'https://cabin1701.github.io/blog/ja/search/'
+  : 'https://cabin1701.github.io/blog/search/';
 
 const t = lang === 'es'
   ? {
@@ -58,7 +63,7 @@ const t = lang === 'es'
   <div class="footer-cols">
     <div class="footer-col footer-search">
       <span class="footer-col-title">{t.search}</span>
-      <form class="footer-search-form" role="search" action="/search/">
+      <form class="footer-search-form" role="search" action={searchHref}>
         <label class="visually-hidden" for="footer-q">{t.searchLabel}</label>
         <input id="footer-q" type="search" name="q" placeholder="" />
         <button type="submit" aria-label={t.searchLabel}>⌕</button>
