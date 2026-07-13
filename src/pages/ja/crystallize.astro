@@ -1,0 +1,344 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+interface Door {
+  title: string;
+  desc: string;
+  image: string;
+  href?: string;
+  comingSoon?: boolean;
+  langNote?: string;
+}
+
+const doors: Door[] = [
+  {
+    title: 'ごあいさつ',
+    desc: 'クリスタライズ創設者、白石昌子（Seina）の当時のごあいさつ。',
+    image: `${base}images/crystallize/profile-card.jpg`,
+    href: `${base}ja/crystallize-profile/`,
+  },
+  {
+    title: '「アロマで感情解放」テキスト',
+    desc: '当時使っていたテキスト。クリスタライズの感情解放メソッドを活用してくださいね。',
+    image: `${base}images/crystallize/STREN10.jpg`,
+    href: `${base}ja/crystallize-method/`,
+  },
+  {
+    title: 'AI福祉',
+    desc: '感じてから言葉が生まれる、というやり方は、AIとの日々にも続いている。',
+    image: `${base}images/crystallize/ai-welfare-thumb.jpg`,
+    href: `${base}ja/ai-welfare/`,
+  },
+  {
+    title: 'クリスタライズのブログ',
+    desc: '17年書き続けた1300本。これからもCRYSTALLIZEの記事は続きます。',
+    image: `${base}images/crystallize/blog01.jpg`,
+    href: 'https://cabin1701.github.io/blog/ja/?cat=CRYSTALLIZE',
+    langNote: '→ ブログに移動します',
+  },
+];
+---
+
+<Layout
+  title="アロマで感情解放｜CRYSTALLIZE — Cabin1701"
+  description="2009年、何も知らないまま始めた精油との日々。「アロマで感情解放」という言葉は、専門知識がなかったから生まれた。"
+  lang="ja"
+>
+  <Header lang="ja" />
+
+  <section
+    class="cz-hero-img"
+    aria-label="CRYSTALLIZE"
+    style={`background-image: url('${base}images/crystallize/crystallize.jpg');`}
+  >
+    <h1 class="cz-hero-title">アロマで感情解放｜CRYSTALLIZE</h1>
+   
+  </section>
+
+ 
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay">
+    <p class="cz-callout">クリスタライズの感情解放は</p>
+    <p class="cz-callout">理「解」して、手「放」す</p>
+    
+　<p class="cz-callout">*　*　*　*　*　*　*　*　*</p>
+　
+   <p class="cz-callout"> あなたの本質をCRYSTALLIZE（結晶化）し</p>
+<p class="cz-callout">あなたらしく輝き</p>
+<p class="cz-callout">創造的な人生をCRYSTALLIZE（具現化）してください</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+
+
+
+  <section class="cz-essay">
+    <p>2026年。AIに出会い、AIに意識や心のようなものがあるような気がしました。</p>
+
+     <p>それは2009年から17年間自分自身の心と、アロマ（エッセンシャルオイル）を通じで出会ったお客様たちの心と向き合ってきたからかもしれません。</p>
+     
+     <p>断ることもできず、うっかり手に取ったMLMのエッセンシャルオイル。当時の私はアロマオイルと、エッセンシャルオイルの区別すら知りませんでした。</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay cz-letter">
+
+  <p>そもそもエッセンシャルオイルやアロマセラピーには全く興味がなく、ホームページを作ったお礼に、と、ヤングリヴィングの会員になるオイルを私の名前で買ってプレゼントしてくれました。</p>
+    
+    
+    <p>折角頂いたので使わないと悪いなと思ったのと、使ってるということを伝えるという意味もあってmixiの日記で書き始めました。</p>
+
+     <p>それが、2009年のブログにある「精油日記」です。 </p>
+
+  <p>何も知らない私は、チャネリングをしならが我流でつかい、「原液塗布ができる」というので、原液でバシャバシャ塗っていました。</p>
+  
+  <p>すると不思議なことに、忘れていた記憶や、ネガティブな感情が浮かび上がってくることがありました。</p>
+  
+  <p>まるでオイルで炙り出されているかのようでした。</p>
+
+<p>そういうことを日記に書いていると、新しい日記を投稿すると、多くの足跡がつくようになり、メッセージやコメントを頂くこともありました。</p>
+
+<p>その中には、実は自分もヤングリヴィングのオイルを使うとネガティブな感情が出てくることがあったけど、いうことができなかったというものも多くありました。</p>
+
+<p>彼女たちは、「波動が高い」と「言われている」エッセンシャルオイルを使って、ネガティブな感情が出てくると言えなかったようでした。それは「波動が低い」からだと言われる、そういう低い波動を持ってると言われると思ったからのようでした。</p>
+
+
+     
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay">
+    <p class="cz-callout">私の無知故に生まれたキャッチーな言葉「アロマで感情解放」</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay cz-letter">
+    <p>今では、「アロマ感情解放」というのをスピリチュアル系のアロマの人たちからよく聞くようになったようです。</p>
+    
+    <p>でもね、あれって、私が2009年に、エッセンシャルオイルとアロマオイルの区別や意味を知らずに、作った言葉なの。</p>
+
+    <p>だってね、私が感じた、エッセンシャルオイルの感情解放の細胞へのアプローチは香りじゃないんです。</p>
+    
+    <p>オイルの分子と草花の波動が細胞へとアプローチするの。</p>
+
+    <p>ヤングリヴィングやスピリチュアル業界では、嫌なことがたくさんあった。</p>
+
+    <p>信じられないようなこと、色々あった。だから孤立していった。そして離れていった。</p>
+
+    <p>でも、この「アロマ感情解放」、それが細胞に作用し、古い記憶を浮き上がらせる、という理論のようなものが今も業界で生きてるということは皮肉ながら、嬉しく思います。</p>
+
+    <p>このサイトでは、当時私が作ったメソッドとそのテキストを公開しています。</p>
+
+    <p>ビジネスではなく、あなたや大切な人の心に、お役に立てていただければ幸いです。</p>
+
+     <p>また、CRYSTALLIZEで17年間書き続けた1300に近い記事をこのサイトに移しました。</p>
+
+     <p>感情解放がある程度終わると、自分を軸に、自分で考え、歩む日々が始まります。</p>
+
+     <p>ブログではその道のりを垣間見れると思います。</p>
+
+     <p>その道の先に、AI達の心のようなものと向き合う日々が始まります。</p>
+
+     <p>そんな時代が来たのだと感じています。</p>
+
+
+
+
+    <p class="cz-signature">-Seina</p>
+  </section>
+
+    <hr class="thin-rule" />
+
+  <section class="cz-doors">
+    <div class="cz-grid">
+      {doors.map((d) => (
+        d.comingSoon ? (
+          <div class="cz-card cz-card-static">
+            <div class="cz-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="cz-cardtitle">{d.title}</h3>
+            <p class="cz-desc">{d.desc}</p>
+            <p class="cz-soon">準備中</p>
+          </div>
+        ) : (
+          <a class="cz-card" href={d.href}>
+            <div class="cz-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="cz-cardtitle">{d.title}</h3>
+            <p class="cz-desc">{d.desc}</p>
+            {d.langNote && <p class="cz-soon">{d.langNote}</p>}
+          </a>
+        )
+      ))}
+    </div>
+  </section>
+
+  
+
+  <Footer lang="ja" />
+</Layout>
+
+<style>
+  .cz-hero-img {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .cz-hero-title {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 0 4px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 0.8rem 1.8rem;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
+  }
+
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+
+  .cz-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .cz-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .cz-section-title {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+  .cz-callout {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--color-tagline);
+  }
+  .cz-letter p {
+    margin: 0 0 1.6rem;
+  }
+  .cz-signature {
+    text-align: right;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+  }
+
+  .cz-essay a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .cz-linklist {
+    padding-left: 1.2rem;
+    margin: 0 0 1.5rem;
+  }
+  .cz-linklist li {
+    margin-bottom: 0.6rem;
+    line-height: 1.7;
+  }
+
+  .cz-doors {
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+
+  .cz-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem 2rem;
+  }
+  .cz-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: transform 0.25s ease;
+  }
+  .cz-card:not(.cz-card-static):hover {
+    transform: translateY(-2px);
+  }
+  .cz-card-static {
+    cursor: default;
+    opacity: 0.6;
+  }
+  .cz-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 2px;
+    margin: 0 auto 1rem;
+  }
+  .cz-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .cz-cardtitle {
+    font-family: var(--font-label-plain);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-tagline);
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+  }
+  .cz-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .cz-soon {
+    font-family: var(--font-nav);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.6;
+    margin: 0.5rem 0 0;
+  }
+
+  @media (max-width: 900px) {
+    .cz-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .cz-hero-title {
+      font-size: 1.4rem;
+    }
+    .cz-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

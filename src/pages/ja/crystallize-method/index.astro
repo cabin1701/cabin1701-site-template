@@ -1,0 +1,179 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+interface Chapter {
+  title: string;
+  href: string;
+}
+
+const chapters: Chapter[] = [
+  { title: '「アロマで感情解放」へようこそ', href: `${base}ja/crystallize-method/01-welcome/` },
+  { title: 'エッセンシャルオイルの細胞へのアプローチ', href: `${base}ja/crystallize-method/02-approach/` },
+  { title: '「自分の感情」を知る', href: `${base}ja/crystallize-method/03-feelings/` },
+  { title: '違う観点から考える「崩壊しよう！」', href: `${base}ja/crystallize-method/04-collapse/` },
+  { title: 'エッセンシャルオイルの使い方', href: `${base}ja/crystallize-method/05-usage/` },
+  { title: 'ローズの使い方', href: `${base}ja/crystallize-method/06-rose/` },
+  { title: '「新しい経験」で塗り替えて行く', href: `${base}ja/crystallize-method/07-rewrite/` },
+];
+---
+
+<Layout
+  title="「アロマで感情解放」テキスト｜CRYSTALLIZE — Cabin1701"
+  description="2009年から始まった、クリスタライズ独自の「アロマで感情解放」メソッド。原文をそのまま公開しています。"
+  lang="ja"
+>
+  <Header lang="ja" />
+
+  <section class="cm-essay">
+    <h1 class="cm-title">「アロマで感情解放」テキスト</h1>
+
+    <!-- ▼▼ 2026年の挨拶：ここに船長が書いたテキストを入れる ▼▼ -->
+    <div class="cm-greeting-placeholder">
+      
+      <p>2006年、離婚をした私は、自分の人生を結婚までまでリセットしようと思い、20代のほとんどを過ごしたニューヨークに3ヶ月滞在しました。</p>
+
+<p>中国人家族が住むアパートの一室を安く借りることができました。</p>
+
+<p>昔の友人の多くは、すでにニューヨークを去り、お金もあまりなかったので私はその部屋に数日間閉じこもることもあり、誰もと話さない日が続くこともありました。</p>
+
+<p>ある時3日を過ぎた時、突然忘れていた記憶が湧き上がってきました。それは小学生の頃のいじめの記憶でした。もう乗り越え、どうでもいいと、頭では思っていたはずのものでした。</p>
+
+<p>その感情を体の中から出そうと、涙を流しながら、嗚咽のように、喉の奥、体の奥から吐き出しました。</p>
+
+<p>これが私の感情解放の始めての経験でした。</p>
+
+<p>2009年にエッセンシャルオイル出会い、オイルをバシャバシャ塗ってるうちに、忘れていた感情が浮かび上がる、あの頃の感覚に似たものを経験しました。</p>
+
+<p>ここから私のエッセンシャルオイルを使った感情解放の探究が始まりました。</p>
+
+<p>ここで公開しているテキストは、2019年ごろにお客様とのワークで実際に使っていたものです。</p>
+
+<p>私を信頼してくださったお客様たちと、私自身との共同作業がこのテキストには詰め込まれています。</p>
+
+<p>CRYSTALLIZEの感情解放は、理「解」して手「放」す。</p>
+
+<p>理解、納得ができたら、それは自ずと手放せる。</p>
+
+<p>エッセンシャルオイルはサポートでしかありません。結局は自分と向き合い、自分や自分の人生、人生に関わった人たち野、それぞれの事情を理解することが必要となります。</p>
+
+<p>この作業が最も難しい段階です。</p>
+
+<p>このプロセスが、勘違いや、傲慢さを回避する鍵になります。</p>
+
+<p>「どうして？」を掘り下げる際には、心理学、社会学、歴史の理解が必要になります。これは私がそれらを学んだというのではなく、結局そこにさまざまな要因、があり、そこに理解のための種明かしがあることが多いと気づきました。</p>
+
+<p>ある程度、感情解放が終わると、新しい経験を重ね新しい自分を作っていきます。</p>
+
+<p>そして、どう生きるのかと問い始まることになるでしょう。</p>
+
+<p>それがきっと哲学なのだと思います。</p>
+
+<p>感情の問題を抱えたままでは、理想と現実、頭と心のスムーズな連携が取れません。</p>
+
+<p>「自分」を諦めないでください。</p>
+
+<p>そして、世界で一人だけの光を輝かせてください。</p>
+
+<p>CRYSTALLIZE - あなたを結晶化、具現化しなさい。</p>
+
+<p>白石昌子（Seina）</p>
+
+
+    </div>
+    <!-- ▲▲ ここまで ▲▲ -->
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cm-essay">
+    <h2 class="cm-section-title">目次</h2>
+    <ol class="cm-toc">
+      {chapters.map((c) => (
+        <li><a href={c.href}>{c.title}</a></li>
+      ))}
+    </ol>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cm-essay">
+    <h2 class="cm-section-title">テキスト内のブレンドオイルに関して</h2>
+
+    <p>オイルのレシピを公開したかったのですが、今でも私のワークや講習を涼しい顔して持っていき、ご商売にされて方々が結構いて、それは辛かったのね。あと、ブレンドに使うオイルは日本では入手が難しいオイルもあり、レシピを公開してもご商売レベルでオイルを探し、入手するような方でないと難しいと感じています。</p>
+
+    <p>特にローズオットーは、私自身が海外からいくつも取り寄せ厳選してきました。私の感覚ではブルガリアのオーガニックのエネルギーが一番濁りがなく、ワークに適していました。ヤングリヴィングのローズでも可能と言えば可能ですが、私の経験からかなり感情が荒れる場合もあります。</p>
+
+    <p>私が、自分の感覚を頼りに、オイルを選んできたように、きっとあなたにもそういうセンサーはあるはずです。インナーストレングスやアンジェリック以外にも、何か見つかるかもしれません。見つけてください。</p>
+  </section>
+
+  <Footer lang="ja" />
+</Layout>
+
+<style>
+  .cm-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .cm-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .cm-title {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: center;
+    margin: 3rem 0 2rem;
+  }
+  .cm-greeting-placeholder {
+    text-align: center;
+    padding: 2rem;
+    border: 1px dashed var(--color-tagline);
+    border-radius: 6px;
+    color: var(--color-tagline);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+  .cm-section-title {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+  .cm-toc {
+    padding-left: 1.4rem;
+    line-height: 2.2;
+  }
+  .cm-toc a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+  .cm-signature {
+    text-align: right;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+    margin: 0 0 0.3rem;
+  }
+  .cm-note {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--color-tagline);
+    opacity: 0.7;
+  }
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+</style>
