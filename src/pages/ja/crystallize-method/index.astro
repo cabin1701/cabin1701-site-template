@@ -28,6 +28,8 @@ const chapters: Chapter[] = [
   <Header lang="ja" />
 
   <section class="cm-essay">
+    <p class="cm-breadcrumb"><a href={`${base}ja/crystallize/`}>← CRYSTALLIZEに戻る</a></p>
+
     <h1 class="cm-title">「アロマで感情解放」テキスト</h1>
 
     <!-- ▼▼ 2026年の挨拶：ここに船長が書いたテキストを入れる ▼▼ -->
@@ -123,6 +125,14 @@ const chapters: Chapter[] = [
   }
   .cm-essay p {
     margin: 0 0 1.4rem;
+  }
+  .cm-breadcrumb {
+    margin: 1.5rem 0;
+  }
+  .cm-breadcrumb a {
+    color: var(--color-tagline);
+    font-size: 0.9rem;
+    text-decoration: underline;
   }
   .cm-title {
     font-family: var(--font-body);
