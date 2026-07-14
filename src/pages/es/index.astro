@@ -32,6 +32,17 @@ const base = import.meta.env.BASE_URL;
   </section>
 
   <BentoGrid lang="es" />
+
+  <section class="cz-mini">
+    <a class="cz-mini-link" href={`${base}es/crystallize/`}>
+      <p class="cz-mini-text">
+        La Liberación Emocional a través de CRYSTALLIZE significa:<br />
+        Comprender el pasado, y Soltar el peso.
+      </p>
+      <span class="cz-mini-cta">Entrar →</span>
+    </a>
+  </section>
+
   <Footer lang="es" />
 </Layout>
 
@@ -112,5 +123,37 @@ const base = import.meta.env.BASE_URL;
     .hero-text .tagline {
       font-size: 1.1rem;
     }
+  }
+
+  .cz-mini {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 3rem;
+    text-align: center;
+  }
+  .cz-mini-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: filter 0.25s ease;
+  }
+  .cz-mini-link:hover {
+    filter: brightness(1.03);
+  }
+  .cz-mini-text {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-tagline);
+    margin: 0 0 0.75rem;
+  }
+  .cz-mini-cta {
+    display: inline-block;
+    font-family: var(--font-nav);
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 0.1rem;
   }
 </style>

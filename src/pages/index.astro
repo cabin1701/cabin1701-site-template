@@ -55,6 +55,17 @@ const base = import.meta.env.BASE_URL;
   <hr class="feature-rule" />
 
   <BentoGrid />
+
+  <section class="cz-mini">
+    <a class="cz-mini-link" href={`${base}crystallize/`}>
+      <p class="cz-mini-text">
+        Emotional Release through CRYSTALLIZE means:<br />
+        Comprehend the past, and Cut loose the weight.
+      </p>
+      <span class="cz-mini-cta">Enter →</span>
+    </a>
+  </section>
+
   <Footer />
 </Layout>
 
@@ -214,5 +225,37 @@ const base = import.meta.env.BASE_URL;
     .aw-feature-tagline {
       font-size: 1.1rem;
     }
+  }
+
+  .cz-mini {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 3rem;
+    text-align: center;
+  }
+  .cz-mini-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: filter 0.25s ease;
+  }
+  .cz-mini-link:hover {
+    filter: brightness(1.03);
+  }
+  .cz-mini-text {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-tagline);
+    margin: 0 0 0.75rem;
+  }
+  .cz-mini-cta {
+    display: inline-block;
+    font-family: var(--font-nav);
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 0.1rem;
   }
 </style>
