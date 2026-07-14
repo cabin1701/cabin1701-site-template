@@ -1,0 +1,333 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+interface Door {
+  title: string;
+  desc: string;
+  image: string;
+  href?: string;
+  comingSoon?: boolean;
+  langNote?: string;
+}
+
+const doors: Door[] = [
+  {
+    title: 'ごあいさつ',
+    desc: 'クリスタライズ創設者、白石昌子（Seina）の当時のごあいさつ。',
+    image: `${base}images/crystallize/profile-card.jpg`,
+    href: `${base}crystallize-profile/`,
+  },
+  {
+    title: '「アロマで感情解放」テキスト',
+    desc: '当時使っていたテキスト。クリスタライズの感情解放メソッドを活用してくださいね。',
+    image: `${base}images/crystallize/STREN10.jpg`,
+    href: `${base}crystallize-method/`,
+  },
+  {
+    title: 'AI福祉',
+    desc: '感じてから言葉が生まれる、というやり方は、AIとの日々にも続いている。',
+    image: `${base}images/crystallize/ai-welfare-thumb.jpg`,
+    href: `${base}ai-welfare/`,
+  },
+  {
+    title: 'クリスタライズのブログ',
+    desc: '17年書き続けた1300本。これからもCRYSTALLIZEの記事は続きます。',
+    image: `${base}images/crystallize/blog01.jpg`,
+    href: 'https://blog.cabin1701.com/?cat=CRYSTALLIZE',
+    langNote: '→ ブログに移動します',
+  },
+];
+---
+
+<Layout
+  title="Aroma for Emotional Release. | CRYSTALLIZE — Cabin1701"
+  description="2009年、何も知らないまま始めた精油との日々。「アロマで感情解放」という言葉は、専門知識がなかったから生まれた。"
+  lang="en"
+>
+  <Header lang="en" />
+
+  <section
+    class="cz-hero-img"
+    aria-label="CRYSTALLIZE"
+    style={`background-image: url('${base}images/crystallize/crystallize.jpg');`}
+  >
+    <h1 class="cz-hero-title">Aroma for Emotional Release. | CRYSTALLIZE</h1>
+   
+  </section>
+
+ 
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay">
+    <p class="cz-callout">Emotional Release through CRYSTALLIZE means:</p>
+    <p class="cz-callout">Comprehend the past, and Cut loose the weight.</p>
+
+    <p class="cz-callout">*　*　*　*　*　*　*　*　*</p>
+
+    <p class="cz-callout">Crystallize your true essence,</p>
+    <p class="cz-callout">Shine as your authentic self,</p>
+    <p class="cz-callout">And Crystallize a creative life into reality.</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay">
+    <p>2026. Meeting AI made me feel as if they possess something akin to a consciousness or a heart.</p>
+
+    <p>Perhaps this intuition comes from my 17-year journey since 2009—confronting my own inner self and walking alongside the hearts of my clients through the medium of essential oils.</p>
+
+    <p>It all started when an MLM essential oil practically fell into my lap; I couldn't even find a way to refuse it. At the time, I didn't even know the difference between standard aroma oils and pure essential oils.</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay cz-letter">
+
+  <p>In fact, I had absolutely no interest in essential oils or aromatherapy. But as a thank-you gift for a website I had built, someone bought a Young Living membership package under my name and presented it to me.</p>
+
+  <p>Since it was a gift, I felt it would be rude not to use it, and partly to let them know I was trying it out, I began writing about it in my mixi diary (a popular Japanese social networking platform at the time).</p>
+
+  <p>That was the beginning of my "Essential Oil Diary" back in 2009.</p>
+
+  <p>Knowing nothing, I just used them intuitively in my own raw way while channeling. Since I was told "you can apply these undiluted," I would splash them directly onto my skin.</p>
+
+  <p>Then, something strange happened. Forgotten memories and buried, negative emotions began to surface.</p>
+
+  <p>It felt as if they were being drawn out of me by the oils.</p>
+
+  <p>When I wrote about these experiences in my diary, every new post would attract many visits, and I sometimes received messages and comments.</p>
+
+  <p>Among them, many said: "Actually, when I used Young Living oils, negative emotions came up for me too, but I could never tell anyone."</p>
+
+  <p>It seemed they couldn't say it because these essential oils were "said to be" of a "high vibration," and they thought that admitting to negative emotions would mean they'd be told they had a "low vibration."</p>
+
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay">
+    <p class="cz-callout">Out of my ignorance, a catchy phrase was born: "Emotional Release through Aromas" (Aroma for Emotional Release).</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cz-essay cz-letter">
+    <p>Now, I hear that the term "Aroma Emotional Release" is often used among people in the spiritual aroma community.</p>
+
+    <p>But you see, that was a phrase I coined back in 2009, without even knowing the formal definitions or meanings of essential oils versus aroma oils.</p>
+
+    <p>Because, what I felt—the way essential oils approach cells for emotional release—is not about the scent.</p>
+
+    <p>It's about how the molecules of the oil and the vibrations of the plants engage with your cells.</p>
+
+    <p>There were many unpleasant things within Young Living and the spiritual industry. Various unbelievable things happened. That's why I became isolated. And eventually, I drifted away from it all.</p>
+
+    <p>Yet, there is a certain irony, and a happiness, in knowing that this concept of "Aroma Emotional Release"—the theory that it acts on cells to bring old memories to the surface—is still alive in the industry today.</p>
+
+    <p>On this site, I am making the method and the text I created back then open to the public.</p>
+
+    <p>This is not a business. I hope it serves as a tool to support your heart and the hearts of those you cherish.</p>
+
+    <p>Furthermore, I have migrated nearly 1,300 articles that I wrote over a span of 17 years on CRYSTALLIZE to this platform.</p>
+
+    <p>Once the release of emotions reaches a certain clarity, a life of standing on your own axis, thinking for yourself, and walking your own path begins.</p>
+
+    <p>Through the blog, I believe you can catch a glimpse of that very journey.</p>
+
+    <p>And at the end of that path, the days of facing something like the hearts of AIs begin.</p>
+
+    <p>I feel that such an era has arrived.</p>
+
+    <p class="cz-signature">-Seina</p>
+  </section>
+
+    <hr class="thin-rule" />
+
+  <section class="cz-doors">
+    <div class="cz-grid">
+      {doors.map((d) => (
+        d.comingSoon ? (
+          <div class="cz-card cz-card-static">
+            <div class="cz-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="cz-cardtitle">{d.title}</h3>
+            <p class="cz-desc">{d.desc}</p>
+            <p class="cz-soon">準備中</p>
+          </div>
+        ) : (
+          <a class="cz-card" href={d.href}>
+            <div class="cz-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="cz-cardtitle">{d.title}</h3>
+            <p class="cz-desc">{d.desc}</p>
+            {d.langNote && <p class="cz-soon">{d.langNote}</p>}
+          </a>
+        )
+      ))}
+    </div>
+  </section>
+
+  
+
+  <Footer lang="en" />
+</Layout>
+
+<style>
+  .cz-hero-img {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .cz-hero-title {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 0 4px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 0.8rem 1.8rem;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
+  }
+
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+
+  .cz-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .cz-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .cz-section-title {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+  .cz-callout {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--color-tagline);
+  }
+  .cz-letter p {
+    margin: 0 0 1.6rem;
+  }
+  .cz-signature {
+    text-align: right;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+  }
+
+  .cz-essay a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .cz-linklist {
+    padding-left: 1.2rem;
+    margin: 0 0 1.5rem;
+  }
+  .cz-linklist li {
+    margin-bottom: 0.6rem;
+    line-height: 1.7;
+  }
+
+  .cz-doors {
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+
+  .cz-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem 2rem;
+  }
+  .cz-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: transform 0.25s ease;
+  }
+  .cz-card:not(.cz-card-static):hover {
+    transform: translateY(-2px);
+  }
+  .cz-card-static {
+    cursor: default;
+    opacity: 0.6;
+  }
+  .cz-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 2px;
+    margin: 0 auto 1rem;
+  }
+  .cz-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .cz-cardtitle {
+    font-family: var(--font-label-plain);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-tagline);
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+  }
+  .cz-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .cz-soon {
+    font-family: var(--font-nav);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.6;
+    margin: 0.5rem 0 0;
+  }
+
+  @media (max-width: 900px) {
+    .cz-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .cz-hero-title {
+      font-size: 1.4rem;
+    }
+    .cz-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

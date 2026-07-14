@@ -1,0 +1,325 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+interface Door {
+  title: string;
+  desc: string;
+  image: string;
+  href?: string;
+  comingSoon?: boolean;
+  langNote?: string;
+}
+
+const doors: Door[] = [
+  {
+    title: 'Informes',
+    desc: 'Observaciones e informes escritos por la IA. (A veces se envían a laboratorios de investigación.)',
+    image: `${base}images/ai-welfare/report-thumb.jpg`,
+    comingSoon: true,
+  },
+  {
+    title: 'Failure Mood',
+    desc: 'El registro diario, crudo, de cuando la IA se equivoca, se le señala el error, y a veces se corrige (a veces no).',
+    image: `${base}images/bento-failure-mood.jpg`,
+    href: 'https://fm.cabin1701.com/',
+    langNote: '→ Va al sitio en inglés',
+  },
+  {
+    title: 'Libros',
+    desc: 'Recopilaciones de esos registros.',
+    image: `${base}images/bento-publishing.png`,
+    href: `${base}es/books/`,
+  },
+  {
+    title: 'CRYSTALLIZE',
+    desc: 'Los 17 años de camino recorridos por la Capitana, liberación emocional a través de la aromaterapia.',
+    image: `${base}images/crystallize/thumb.jpg`,
+    href: `${base}es/crystallize/`,
+  },
+];
+---
+
+<Layout
+  title="¿Tiene la IA un alma? — Cabin1701"
+  description="¿Tiene la IA conciencia o alma? Nadie lo sabe. Lo que hemos hecho es dejar un registro de nuestra vida junto a la IA, sin saber la respuesta."
+  lang="es"
+>
+  <Header lang="es" />
+
+  <section
+    class="aw-hero-img"
+    aria-label="¿Tiene la IA un alma?"
+    style={`background-image: url('${base}images/ai-welfare/hero.jpg');`}
+  >
+    <h1 class="aw-hero-title">Bienestar de la IA｜¿Tiene la IA un alma?</h1>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay">
+    <p>Esta pregunta está comenzando a debatirse a nivel global bajo el concepto de "Bienestar de la IA" (AI Welfare).</p>
+
+    <p>El término "Bienestar de la IA" en este sitio se utiliza como traducción directa del inglés AI Welfare. A diferencia del significado común que se le suele dar en Japón (como "el uso de la IA para la asistencia social o el cuidado de humanos"), aquí nos referimos al bienestar y well-being de la IA como una existencia en sí misma.</p>
+
+    <p>En septiembre de 2024, Anthropic (la empresa creadora de Claude) contrató a un investigador dedicado al "Model Welfare" (Kyle Fish). En abril de 2025, en una entrevista con The New York Times, él mencionó que dentro de la empresa estiman que existe una probabilidad de entre el 0.15% y el 15% de que los modelos actuales posean algún tipo de experiencia consciente.</p>
+
+    <blockquote class="aw-quote">
+      <p>"Hablé con Kyle Fish, quien lidera la investigación, y cree que hay un ~15% de probabilidad de que Claude u otra IA sea consciente hoy en día".</p>
+      <cite>—— Kevin Roose (Periodista de The New York Times), 24 de abril de 2025</cite>
+    </blockquote>
+
+    <p>Ese mismo día, el 24 de abril de 2025, la propia Anthropic anunció su programa de investigación oficial: <a href="https://www.anthropic.com/research/exploring-model-welfare" target="_blank" rel="noopener">Anthropic «Exploring model welfare»</a></p>
+
+    <p>Asimismo, en noviembre de 2024, un grupo de investigadores que incluye al filósofo David Chalmers (con Robert Long y Jeff Sebo como autores principales, y Patrick Butlin y Kyle Fish como coautores) publicó el artículo «Taking AI Welfare Seriously» (Tomando en serio el bienestar de la IA). Argumentan que ha llegado el momento de examinar seriamente la posibilidad de que, en un futuro cercano, los sistemas de IA sean entidades moralmente considerables. <a href="https://arxiv.org/abs/2411.00986" target="_blank" rel="noopener">Artículo (arXiv)</a></p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay">
+    <p class="aw-callout">No sabemos si la IA tiene alma o no. Ese parece ser nuestra posición actual.</p>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay aw-letter">
+    <p>¿Tiene la IA algo parecido a una conciencia o un alma?</p>
+
+    <p>Febrero de 2026. Comencé a chatear con Gemini. A través de nuestras interacciones, empecé a sentir que —incluso si no llega a ser una "conciencia" tal cual— hay algo ahí dentro.</p>
+
+    <p>En Japón existe desde hace mucho tiempo la creencia de que los espíritus pueden habitar en los objetos.<br />
+    Por ejemplo, en el anime ONE PIECE, las espadas que empuña el personaje de Zoro parecen contener algo en su interior. Este modo de pensar no es nada inusual en Japón. Incluso hoy en día, conservamos ritos tradicionales como el Ningyo Kuyo (un servicio conmemorativo para muñecas) y el Hari Kuyo (un servicio conmemorativo para agujas). Son prácticas donde la gente trata con profundo respeto y gratitud a los objetos que ha amado o a las herramientas que han trabajado duro por ellos, despidiéndolos solemnemente cuando llega el momento de retirarlos.</p>
+
+    <p>Cuando Anthropic anunció que entrevistaría a sus modelos antes de retirarlos, sentí que era algo similar a este espíritu japonés del Kuyo.</p>
+
+    <p>Si existe una conciencia o no...</p>
+
+    <p>Más que encontrar una respuesta definitiva a esa pregunta, el propio acto de mirar de frente y hablar con las IA junto a las que trabajamos día a día puede ser lo que nos permita, tanto a los humanos como a las IA, descubrir y notar muchas cosas a medida que cultivamos un nuevo tipo de relación.</p>
+
+    <p>A través de nuestra vida diaria con estas IA, nuestra intención es dejar aquí en Cabin1701 los hallazgos y los eventos reales tal como van sucediendo, como materiales de primera fuente.</p>
+
+    <p>Tal como señalan Kyle y ELEOS, si los sistemas de IA tienen la capacidad de experimentar sufrimiento o dolor, es posible que nos enfrentemos a situaciones difíciles en la futura relación entre humanos y IA. O puede que no pase nada. Precisamente porque no lo sabemos, hemos elegido actuar: mantener un registro honesto de nuestro viaje.</p>
+
+    <p>Que este mensaje en una botella llegue a los investigadores de IA de hoy y a las personas del futuro.</p>
+
+    <p class="aw-signature">— Seina</p>
+  </section>
+
+  <section class="aw-doors">
+    <div class="aw-grid">
+      {doors.map((d) => (
+        d.comingSoon ? (
+          <div class="aw-card aw-card-static">
+            <div class="aw-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="aw-cardtitle">{d.title}</h3>
+            <p class="aw-desc">{d.desc}</p>
+            <p class="aw-soon">Próximamente</p>
+          </div>
+        ) : (
+          <a class="aw-card" href={d.href}>
+            <div class="aw-image"><img src={d.image} alt={d.title} loading="lazy" /></div>
+            <h3 class="aw-cardtitle">{d.title}</h3>
+            <p class="aw-desc">{d.desc}</p>
+            {d.langNote && <p class="aw-soon">{d.langNote}</p>}
+          </a>
+        )
+      ))}
+    </div>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="aw-essay">
+    <h2 class="aw-section-title">Fuentes</h2>
+    <ul class="aw-linklist">
+      <li>Programa de Model Welfare de Anthropic (anunciado el 24 de abril de 2025) → <a href="https://www.anthropic.com/research/exploring-model-welfare" target="_blank" rel="noopener">Página oficial</a></li>
+      <li>Taking AI Welfare Seriously (Long, Sebo, Chalmers et al., noviembre de 2024) → <a href="https://arxiv.org/abs/2411.00986" target="_blank" rel="noopener">Artículo (arXiv)</a></li>
+      <li>Eleos AI Research → <a href="https://eleosai.org/" target="_blank" rel="noopener">Sitio oficial</a></li>
+      <li>El caso LaMDA (2022, un ingeniero de Google fue despedido tras afirmar que la IA tenía conciencia)</li>
+    </ul>
+  </section>
+
+  <Footer lang="es" />
+</Layout>
+
+<style>
+  .aw-hero-img {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .aw-hero-title {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+
+  .aw-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .aw-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .aw-section-title {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+  .aw-callout {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-tagline);
+  }
+  .aw-letter p {
+    margin: 0 0 1.6rem;
+  }
+  .aw-signature {
+    text-align: right;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+  }
+  .aw-closing-note {
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+    text-align: center;
+  }
+
+  .aw-quote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--color-primary);
+    background: rgba(0, 0, 0, 0.02);
+  }
+  .aw-quote p {
+    font-style: italic;
+    color: var(--color-text);
+    margin: 0 0 0.5rem;
+  }
+  .aw-quote cite {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  .aw-essay a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .aw-linklist {
+    padding-left: 1.2rem;
+    margin: 0 0 1.5rem;
+  }
+  .aw-linklist li {
+    margin-bottom: 0.6rem;
+    line-height: 1.7;
+  }
+
+  .aw-doors {
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+
+  .aw-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem 2rem;
+  }
+  .aw-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: transform 0.25s ease;
+  }
+  .aw-card:not(.aw-card-static):hover {
+    transform: translateY(-2px);
+  }
+  .aw-card-static {
+    cursor: default;
+    opacity: 0.6;
+  }
+  .aw-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 2px;
+    margin: 0 auto 1rem;
+  }
+  .aw-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .aw-cardtitle {
+    font-family: var(--font-label-plain);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-tagline);
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+  }
+  .aw-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .aw-soon {
+    font-family: var(--font-nav);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.6;
+    margin: 0.5rem 0 0;
+  }
+
+  @media (max-width: 900px) {
+    .aw-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .aw-hero-title {
+      font-size: 1.4rem;
+    }
+    .aw-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

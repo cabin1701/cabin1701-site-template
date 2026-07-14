@@ -1,0 +1,174 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+interface Chapter {
+  title: string;
+  href: string;
+}
+
+const chapters: Chapter[] = [
+  { title: 'Welcome to "Aroma for Emotional Release"', href: `${base}crystallize-method/01-welcome/` },
+  { title: 'How Essential Oils Approach the Cells', href: `${base}crystallize-method/02-approach/` },
+  { title: 'Knowing "Your Own Emotions"', href: `${base}crystallize-method/03-feelings/` },
+  { title: 'Thinking from a Different Angle: "Let\'s Collapse!"', href: `${base}crystallize-method/04-collapse/` },
+  { title: 'How to Use Essential Oils', href: `${base}crystallize-method/05-usage/` },
+  { title: 'How to Use Rose', href: `${base}crystallize-method/06-rose/` },
+  { title: 'Repainting with "New Experiences"', href: `${base}crystallize-method/07-rewrite/` },
+];
+---
+
+<Layout
+  title="Aroma for Emotional Release. | CRYSTALLIZE — Cabin1701"
+  description="A method born in 2009: CRYSTALLIZE's own 'Aroma for Emotional Release.' The original text, published as it was written."
+  lang="en"
+>
+  <Header lang="en" />
+
+  <section class="cm-essay">
+    <p class="cm-breadcrumb"><a href={`${base}crystallize/`}>← Back to CRYSTALLIZE</a></p>
+
+    <h1 class="cm-title">Aroma for Emotional Release. | CRYSTALLIZE</h1>
+
+    <div class="cm-greeting-placeholder">
+
+      <p>In 2006, following my divorce, I decided to reset my life back to the days before my marriage. To do this, I went to New York—a city where I had spent most of my 20s—and stayed there for three months.</p>
+
+<p>I managed to rent a room cheaply in an apartment shared with a Chinese family. Most of my old friends had already left New York, and with very little money, there were times I stayed shut inside that room for days on end. Days blended into one another without speaking to a single soul.</p>
+
+<p>Then, after one such stretch that lasted over three days, a memory I had long forgotten suddenly surged to the surface. It was the memory of being bullied back in elementary school. In my head, I thought I had already overcome it, that it didn't matter anymore.</p>
+
+<p>But to push that emotion out of my body, I let the tears flow, weeping and retching it out from the back of my throat, from deep within my stomach, my physical being.<br />
+That was my very first experience of emotional release.</p>
+
+<p>Years later, in 2009, when I encountered pure essential oils, I experienced something similar to that sensation. As I splashed the oils onto my skin, those forgotten emotions began to float back to the surface.<br />
+And so began my exploration into emotional release using essential oils.</p>
+
+<p>The text shared here is the actual material I used in workshops with my clients around 2019. It is packed with the collaborative process between myself and the clients who placed their trust in me.</p>
+
+<p>Emotional release through CRYSTALLIZE is about Comprehending to Cut loose.<br />
+Once you understand and accept the situation, letting go happens naturally.<br />
+The essential oils are nothing more than a support system.<br />
+In the end, you must face yourself, your own life, and understand the unique circumstances of the people who crossed your path.</p>
+
+<p>This step is the most difficult stage.<br />
+Yet, this process is the key to avoiding misunderstandings and arrogance.<br />
+When you dig deep into the "Why?", it requires an understanding of psychology, sociology, and history.<br />
+I'm not saying that I formally studied these subjects, but rather that I realized that various factors lie within them, and that's where the answers for understanding are hidden.</p>
+
+<p>Once emotional release is achieved to a certain degree, you begin to layer new experiences and rebuild a new version of yourself.<br />
+And then, you will begin to ask: How do I want to live?<br />
+I believe that inquiry is what philosophy is.</p>
+
+<p>As long as you carry unresolved emotional baggage, your ideals and your reality, your mind and your heart, cannot work together smoothly.<br />
+Please, do not give up on "yourself."<br />
+Shine your light—the only light of its kind in this entire world.</p>
+
+<p>CRYSTALLIZE — Crystallize your essence, and crystallize your life.</p>
+
+<p>- Seina (Shoko Shiraishi)</p>
+
+    </div>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cm-essay">
+    <h2 class="cm-section-title">Table of Contents</h2>
+    <ol class="cm-toc">
+      {chapters.map((c) => (
+        <li><a href={c.href}>{c.title}</a></li>
+      ))}
+    </ol>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cm-essay">
+    <h2 class="cm-section-title">テキスト内のブレンドオイルに関して</h2>
+
+    <p>オイルのレシピを公開したかったのですが、今でも私のワークや講習を涼しい顔して持っていき、ご商売にされて方々が結構いて、それは辛かったのね。あと、ブレンドに使うオイルは日本では入手が難しいオイルもあり、レシピを公開してもご商売レベルでオイルを探し、入手するような方でないと難しいと感じています。</p>
+
+    <p>特にローズオットーは、私自身が海外からいくつも取り寄せ厳選してきました。私の感覚ではブルガリアのオーガニックのエネルギーが一番濁りがなく、ワークに適していました。ヤングリヴィングのローズでも可能と言えば可能ですが、私の経験からかなり感情が荒れる場合もあります。</p>
+
+    <p>私が、自分の感覚を頼りに、オイルを選んできたように、きっとあなたにもそういうセンサーはあるはずです。インナーストレングスやアンジェリック以外にも、何か見つかるかもしれません。見つけてください。</p>
+  </section>
+
+  <Footer lang="en" />
+</Layout>
+
+<style>
+  .cm-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .cm-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .cm-breadcrumb {
+    margin: 1.5rem 0;
+  }
+  .cm-breadcrumb a {
+    color: var(--color-tagline);
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+  .cm-title {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: center;
+    margin: 3rem 0 2rem;
+  }
+  .cm-greeting-placeholder {
+    text-align: center;
+    padding: 2rem;
+    border: 1px dashed var(--color-tagline);
+    border-radius: 6px;
+    color: var(--color-tagline);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+  .cm-section-title {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+  .cm-toc {
+    padding-left: 1.4rem;
+    line-height: 2.2;
+  }
+  .cm-toc a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+  .cm-signature {
+    text-align: right;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+    margin: 0 0 0.3rem;
+  }
+  .cm-note {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--color-tagline);
+    opacity: 0.7;
+  }
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+</style>

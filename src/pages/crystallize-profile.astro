@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="Greeting | CRYSTALLIZE — Cabin1701"
+  description="A greeting from CRYSTALLIZE's founder, Shoko Shiraishi (Seina). From crystallize.jp."
+  lang="en"
+>
+  <Header lang="en" />
+
+  <section class="cp-essay">
+    <p class="cp-breadcrumb"><a href={`${base}crystallize/`}>← Back to CRYSTALLIZE</a></p>
+
+    <h1 class="cp-title">Greeting</h1>
+
+    <img
+      class="cp-photo"
+      src={`${base}images/crystallize/profile-upperbody.jpg`}
+      alt="Shoko Shiraishi (Seina)"
+      loading="lazy"
+    />
+
+    <p>I am a deeply spiritual person.
+    Yet, if you read the Crystallize blog, you will find quite a few articles where I dislike and even reject "spirituality."</p>
+
+    <p>Music, natural products, health foods, and spirituality—this was the environment I grew up in.</p>
+
+    <p>My father, who was a piano teacher, started a shop handling health foods, natural products, and cosmetics in 1969, the year I was born as his second child. Even now, when I visit natural product stores, I often see items that my father used to carry in his shop. Starting what we now call a "natural food store" about 50 years ago was cutting-edge; perhaps it was simply too early for the era.</p>
+
+    <p>When I was in junior high school, my father entered the mountains for Shugendo (asceticism) and later made a living out of spiritual work. Our life changed. Several Buddhist statues were placed around the house, and he began chanting sutras every day. Almost everything in our daily life began to revolve around a "spiritual perspective" and "spiritual values." I was confused and rebelled against it.</p>
+
+    <p>A year or two later, when I was in my third year of junior high school, a severe rash broke out on my legs. Even after going to the hospital, the cause remained unknown. My thighs were raw from scratching, weeping with pus. To sleep at night, I took strong medication to suppress the itching. After this condition persisted for several months, I decided for the first time to have my father "look into it." It was a seance.</p>
+
+    <p>Suddenly, I burst into tears, crying out, "I want to go back to America." Apparently, I had been a soldier who burned to death in World War II. In that past life, I was supposedly a Catholic Christian. After enshrining a statue of the Virgin Mary in my room and pressing my hands together in prayer, the rash completely disappeared within just a few days.</p>
+
+    <p>From that moment on, I became someone who believed in the spiritual world.</p>
+
+    <p>My father's specialty was the memorialization of past lives and ancestors. Every third Sunday of the month, many believers would visit my house for rituals. This continued for decades until my father collapsed from an illness a few years ago. I saw many people seeking help from him. I also witnessed many mysterious and terrifying experiences.</p>
+
+    <p>In 1989, at the age of 20, I went to New York. For the next ten years, I spent most of my time there. Shortly after arriving in New York, someone told me they would teach me how to sing. Knowing nothing at all, I started singing blindly. In 1999, I produced a collection of popular songs from the World War II era with American musicians who had lived through that time, and donated it to 3,500 American nursing homes (Angels Swing).</p>
+
+    <p>Even while away from my father, I had numerous mysterious and dangerous spiritual experiences. When I asked why such things happened, I was told that spirits, sensing they could get by if they followed me because I was my father's daughter, came to let me know something. Looking back, I believe that growing up in that environment opened a channel connecting me to the souls of the deceased. At the time, I had absolutely no control over it. International calls were expensive back then, but I would call my father to have him teach me how to exorcise, memorialize, and elevate those souls.</p>
+
+    <p>So, why do I now dislike and reject spirituality...?</p>
+
+    <p>Around 2009, I began interacting with people in the spiritual community.
+    In the spiritual business, sessions costing 30,000 to 50,000 yen per hour were not uncommon. Atlantis, Lemuria, ability development... Not understanding what any of it was, I also spent hundreds of thousands of yen.</p>
+
+    <p>Through these experiences, I noticed that many people drawn to spirituality harbored emotional problems. More than that, I couldn't deny that something seemed off, emotionally and mentally, with many of those who ran spiritual businesses. They paid large sums of money, received energy work called attunements or ability development, and hung up shingle as "healers." I felt it was a world being constructed by people with some kind of complex who had acquired (or believed they had acquired) some sort of special ability.</p>
+
+    <p>I, too, was living with my own emotional struggles.
+    <em>I felt worthless. It was painful just to exist, and not understanding the meaning of my birth, I think I was searching for the meaning of my existence within the spiritual world.</em></p>
+
+    <p>It took 30 years after first stepping into spirituality for my emotional release to progress to a certain point, for me to internalize new experiences, to begin thinking positively about myself, and for living in "this world" to become easier and more enjoyable.</p>
+
+    <p>Until the Crystallize method of emotional release using aroma was fully formed, I myself was the guinea pig, groping in the dark for over 20 years.</p>
+
+    <p>Despite my father making a living out of spirituality, my family harbored various problems and conflicts. I realized that the root of many of these issues lay within our upbringing and emotions.</p>
+
+    <p>Even if you lean into spirituality, and even if you can temporarily or partially escape into a different world, you cannot run away from reality or from yourself.</p>
+
+    <p>My father opened the spiritual door, walked ahead of me, and guided me.
+    It is precisely because of his life that I noticed the problems that spirituality alone cannot solve, which led to the creation of the Crystallize Emotional Release Method.</p>
+
+    <p>In 2022, I moved to an old folk house in Yamaguchi Prefecture. While doing DIY, cutting wood, and making firewood, I am challenging myself with natural farming for self-sufficiency. Since 2024, I have come to live with cats, and now I live among nature with plants and animals.</p>
+
+    <p class="cp-signature">Shoko Shiraishi (Seina)</p>
+  </section>
+
+  <Footer lang="en" />
+</Layout>
+
+<style>
+  .cp-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .cp-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .cp-breadcrumb {
+    margin: 1.5rem 0;
+  }
+  .cp-breadcrumb a {
+    color: var(--color-tagline);
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+  .cp-title {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: center;
+    margin: 1rem 0 2.5rem;
+  }
+  .cp-signature {
+    text-align: right;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+  }
+  .cp-photo {
+    display: block;
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto 2.5rem;
+    border-radius: 4px;
+  }
+</style>

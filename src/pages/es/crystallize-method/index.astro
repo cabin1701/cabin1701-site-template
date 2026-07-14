@@ -1,0 +1,174 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+
+interface Chapter {
+  title: string;
+  href: string;
+}
+
+const chapters: Chapter[] = [
+  { title: 'Bienvenida a "Aroma para la Liberación Emocional"', href: `${base}es/crystallize-method/01-welcome/` },
+  { title: 'El enfoque celular de los aceites esenciales', href: `${base}es/crystallize-method/02-approach/` },
+  { title: 'Conocer "tus propias emociones"', href: `${base}es/crystallize-method/03-feelings/` },
+  { title: 'Pensar desde otro ángulo: "¡Vamos a colapsar!"', href: `${base}es/crystallize-method/04-collapse/` },
+  { title: 'Cómo usar los aceites esenciales', href: `${base}es/crystallize-method/05-usage/` },
+  { title: 'Cómo usar la rosa', href: `${base}es/crystallize-method/06-rose/` },
+  { title: 'Repintar con "nuevas experiencias"', href: `${base}es/crystallize-method/07-rewrite/` },
+];
+---
+
+<Layout
+  title="Aroma para la Liberación Emocional. | CRYSTALLIZE — Cabin1701"
+  description="Un método nacido en 2009: 'Aroma para la Liberación Emocional', propio de CRYSTALLIZE. El texto original, publicado tal como fue escrito."
+  lang="es"
+>
+  <Header lang="es" />
+
+  <section class="cm-essay">
+    <p class="cm-breadcrumb"><a href={`${base}es/crystallize/`}>← Volver a CRYSTALLIZE</a></p>
+
+    <h1 class="cm-title">Aroma para la Liberación Emocional. | CRYSTALLIZE</h1>
+
+    <div class="cm-greeting-placeholder">
+
+      <p>En 2006, tras mi divorcio, decidí reiniciar mi vida, regresando al punto anterior a mi matrimonio. Para ello, pasé tres meses en Nueva York, la ciudad donde había vivido la mayor parte de mis veintitantos años.</p>
+
+<p>Logré alquilar una habitación económica en el apartamento de una familia china. La mayoría de mis viejos amigos ya se habían marchado de Nueva York y, como casi no tenía dinero, a veces me quedaba encerrada en aquella habitación durante días. Pasé jornadas enteras sin hablar con nadie.</p>
+
+<p>Entonces, tras un aislamiento que superó los tres días, un recuerdo que había olvidado surgió de repente. Era el recuerdo del acoso escolar que sufrí en la primaria. En mi mente, pensaba que ya lo había superado, que ya no importaba.</p>
+
+<p>Para sacar esa emoción de mi cuerpo, lloré, expulsándola con arcadas desde el fondo de mi garganta, desde lo profundo de mi estómago, de mi ser.<br />
+Esa fue mi primera experiencia de liberación emocional.</p>
+
+<p>En 2009, al conocer los aceites esenciales, experimenté una sensación similar. Mientras me aplicaba los aceites a chorros sobre la piel, esos recuerdos olvidados comenzaron a flotar hacia la superficie.<br />
+Así comenzó mi investigación sobre la liberación emocional utilizando aceites esenciales.</p>
+
+<p>El texto que comparto aquí es el material real que utilizaba en las sesiones con mis clientes hacia el año 2019. Este texto condensa el trabajo conjunto entre los clientes que confiaron en mí y mi propia experiencia.</p>
+
+<p>La liberación emocional de CRYSTALLIZE consiste en Comprender para luego Desprenderse.<br />
+Cuando logras entender y asimilar la situación, el desapego ocurre por sí solo.<br />
+Los aceites esenciales son únicamente un soporte.<br />
+Al final, es necesario enfrentarte a ti misma, a tu vida y comprender las circunstancias particulares de cada una de las personas que formaron parte de ella.</p>
+
+<p>Este paso es la etapa más difícil de todo el proceso.<br />
+Sin embargo, este análisis es la clave para evitar malentendidos y soberbia.<br />
+Al profundizar en el "¿Por qué?", se vuelve necesaria la comprensión de la psicología, la sociología y la historia.<br />
+No es que yo haya estudiado formalmente estas disciplinas, sino que me di cuenta de que en ellas convergen diversos factores, y es ahí donde suele encontrarse la clave para la comprensión.</p>
+
+<p>Cuando la liberación emocional concluye hasta cierto punto, comienzas a acumular nuevas experiencias y a construir una nueva versión de ti misma.<br />
+Y entonces, comenzarás a preguntarte: ¿Cómo quiero vivir?<br />
+Creo que en esa pregunta radica la filosofía.</p>
+
+<p>Mientras cargues con problemas emocionales, tus ideales y tu realidad, tu mente y tu corazón, no podrán coordinarse de manera armónica.<br />
+Por favor, no te rindas con "tu propio ser".<br />
+Y haz brillar tu luz, una luz única en todo el mundo.</p>
+
+<p>CRYSTALLIZE — Cristaliza tu esencia, manifiesta tu vida.</p>
+
+<p>- Seina (Shoko Shiraishi)</p>
+
+    </div>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cm-essay">
+    <h2 class="cm-section-title">Índice</h2>
+    <ol class="cm-toc">
+      {chapters.map((c) => (
+        <li><a href={c.href}>{c.title}</a></li>
+      ))}
+    </ol>
+  </section>
+
+  <hr class="thin-rule" />
+
+  <section class="cm-essay">
+    <h2 class="cm-section-title">テキスト内のブレンドオイルに関して</h2>
+
+    <p>オイルのレシピを公開したかったのですが、今でも私のワークや講習を涼しい顔して持っていき、ご商売にされて方々が結構いて、それは辛かったのね。あと、ブレンドに使うオイルは日本では入手が難しいオイルもあり、レシピを公開してもご商売レベルでオイルを探し、入手するような方でないと難しいと感じています。</p>
+
+    <p>特にローズオットーは、私自身が海外からいくつも取り寄せ厳選してきました。私の感覚ではブルガリアのオーガニックのエネルギーが一番濁りがなく、ワークに適していました。ヤングリヴィングのローズでも可能と言えば可能ですが、私の経験からかなり感情が荒れる場合もあります。</p>
+
+    <p>私が、自分の感覚を頼りに、オイルを選んできたように、きっとあなたにもそういうセンサーはあるはずです。インナーストレングスやアンジェリック以外にも、何か見つかるかもしれません。見つけてください。</p>
+  </section>
+
+  <Footer lang="es" />
+</Layout>
+
+<style>
+  .cm-essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .cm-essay p {
+    margin: 0 0 1.4rem;
+  }
+  .cm-breadcrumb {
+    margin: 1.5rem 0;
+  }
+  .cm-breadcrumb a {
+    color: var(--color-tagline);
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+  .cm-title {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: center;
+    margin: 3rem 0 2rem;
+  }
+  .cm-greeting-placeholder {
+    text-align: center;
+    padding: 2rem;
+    border: 1px dashed var(--color-tagline);
+    border-radius: 6px;
+    color: var(--color-tagline);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+  .cm-section-title {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1.5rem;
+  }
+  .cm-toc {
+    padding-left: 1.4rem;
+    line-height: 2.2;
+  }
+  .cm-toc a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+  .cm-signature {
+    text-align: right;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+    margin: 0 0 0.3rem;
+  }
+  .cm-note {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--color-tagline);
+    opacity: 0.7;
+  }
+  .thin-rule {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.6;
+  }
+</style>
