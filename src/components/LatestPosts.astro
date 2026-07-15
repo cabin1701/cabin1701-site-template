@@ -1,0 +1,178 @@
+---
+interface Props {
+  lang?: 'en' | 'es' | 'ja';
+}
+const { lang = 'en' } = Astro.props;
+
+const t = {
+  en: { heading: 'Latest Posts', author: 'Captain Seina', all: 'View all →', blog: 'https://blog.cabin1701.com/' },
+  es: { heading: 'Últimas entradas', author: 'Capitana Seina', all: 'Ver todo →', blog: 'https://blog.cabin1701.com/es/' },
+  ja: { heading: '最新の記事', author: 'Seina 船長', all: 'すべて見る →', blog: 'https://blog.cabin1701.com/ja/' },
+}[lang];
+---
+
+<section class="latest" aria-label={t.heading} data-lang={lang}>
+  <div class="latest-inner">
+    <h2 class="latest-title">{t.heading}</h2>
+    <div class="latest-grid" id="latest-grid" data-author={t.author}>
+      <p class="latest-empty" id="latest-empty" hidden></p>
+    </div>
+    <div class="latest-more">
+      <a class="latest-all" href={t.blog}>{t.all}</a>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ lang }}>
+  (async function () {
+    const grid = document.getElementById('latest-grid');
+    if (!grid) return;
+    const author = grid.dataset.author || '';
+    const fmtDate = (iso) => {
+      const d = new Date(iso + 'T00:00:00');
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${mm}/${dd}/${d.getFullYear()}`;
+    };
+    try {
+      const res = await fetch('https://blog.cabin1701.com/api/latest.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('fetch failed: ' + res.status);
+      const data = await res.json();
+      const posts = (data[lang] || []).slice(0, 6);
+      if (posts.length === 0) throw new Error('no posts');
+      const esc = (s) =>
+        String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      grid.innerHTML = posts
+        .map((p) => {
+          const thumb = p.hero
+            ? `<span class="latest-thumb"><img src="${esc(p.hero)}" alt="" loading="lazy" /></span>`
+            : `<span class="latest-thumb latest-thumb--empty" aria-hidden="true"></span>`;
+          return `<a class="latest-card" href="${esc(p.url)}">
+            ${thumb}
+            <span class="latest-card-title">${esc(p.title)}</span>
+            <span class="latest-meta"><span class="latest-author">${esc(author)}</span><span class="latest-sep">●</span><time datetime="${esc(p.date)}">${fmtDate(p.date)}</time></span>
+          </a>`;
+        })
+        .join('');
+    } catch (err) {
+      const section = document.querySelector('.latest');
+      // 取得できなければセクションごと隠す（トップの見た目を壊さない）
+      if (section) section.setAttribute('hidden', '');
+      console.warn('[LatestPosts]', err);
+    }
+  })();
+</script>
+
+<!-- is:global を使う理由：カードは実行時fetch後に innerHTML で挿入されるため
+     Astro のスコープ属性が付かず scoped CSS が当たらない。全セレクタを .latest 配下に
+     限定することで実質的なスコープは保つ。 -->
+<style is:global>
+  .latest {
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .latest[hidden] { display: none; }
+  .latest-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .latest-title {
+    margin: 0 0 2.5rem;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .latest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 2.25rem;
+  }
+
+  .latest-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .latest-thumb {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    margin-bottom: 1.1rem;
+  }
+  .latest-thumb img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.25s ease;
+  }
+  .latest-thumb--empty {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, rgba(208, 62, 0, 0.08), rgba(8, 0, 120, 0.06));
+  }
+  .latest-card:hover .latest-thumb img {
+    transform: scale(1.04);
+    filter: brightness(1.04);
+  }
+  .latest-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--color-text);
+    margin-bottom: 0.6rem;
+    transition: color 0.2s ease;
+  }
+  .latest-card:hover .latest-card-title { color: var(--color-primary); }
+  .latest-meta {
+    font-family: var(--font-tagline);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+  }
+  .latest-author { color: var(--color-magenta); }
+  .latest-sep { margin: 0 0.5rem; color: var(--color-magenta); opacity: 0.6; font-size: 0.6em; vertical-align: middle; }
+
+  .latest-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: var(--font-italic);
+    font-style: italic;
+    color: var(--color-tagline);
+  }
+
+  .latest-more {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  .latest-all {
+    display: inline-block;
+    font-family: var(--font-nav);
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 0.6rem 1.8rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .latest-all:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+  }
+
+  @media (max-width: 900px) {
+    .latest-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; }
+  }
+  @media (max-width: 560px) {
+    .latest-grid { grid-template-columns: 1fr; gap: 2.25rem; }
+    .latest-title { font-size: 1.6rem; }
+  }
+</style>

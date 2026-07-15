@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import BentoGrid from '../../components/BentoGrid.astro';
+import LatestPosts from '../../components/LatestPosts.astro';
 import Footer from '../../components/Footer.astro';
 const base = import.meta.env.BASE_URL;
 ---
@@ -52,6 +53,8 @@ const base = import.meta.env.BASE_URL;
   <hr class="feature-rule" />
 
   <BentoGrid lang="es" />
+
+  <LatestPosts lang="es" />
 
   <Footer lang="es" />
 </Layout>

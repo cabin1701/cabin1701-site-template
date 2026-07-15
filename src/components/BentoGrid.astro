@@ -21,15 +21,6 @@ const prefix = lang === 'es' ? `${base}es/` : lang === 'ja' ? `${base}ja/` : bas
 
 const itemsAll: Item[] = [
   {
-    label: 'B*LOG',
-    sideTag: '*What\'s New?*',
-    href: lang === 'es' ? 'https://blog.cabin1701.com/es/' : lang === 'ja' ? 'https://blog.cabin1701.com/ja/' : 'https://blog.cabin1701.com/',
-    img: `${base}images/bento-blog.png`,
-    alt: 'B*LOG',
-    smallCaps: true,
-    width: 'wide',
-  },
-  {
     label: lang === 'es' ? 'Publicaciones' : lang === 'ja' ? '出版' : 'Publishing',
     sideTag: lang === 'es' ? 'Nuestros Libros.' : lang === 'ja' ? '私たちの本' : 'Our Books.',
     kicker: 'Something that happened for the first time. And so…',
@@ -52,15 +43,6 @@ const itemsAll: Item[] = [
     width: 'wide',
   },
   {
-    label: 'ai-Vegapedia',
-    sideTag: lang === 'es' ? 'Diccionario.' : lang === 'ja' ? '辞書' :'Dictionary.',
-    href: `${prefix}vegapedia/`,
-    img: `${base}images/bento-vegapedia.png`,
-    alt: 'ai-Vegapedia',
-    smallCaps: false,
-    width: 'narrow',
-  },
-  {
     label: 'CRYSTALLIZE',
     sideTag: lang === 'es' ? 'Comprender el pasado, y Soltar el peso.' : lang === 'ja' ? 'クリスタライズの感情解放は、理「解」して、手「放」す' : 'Comprehend the past, and Cut loose the weight.',
     kicker: lang === 'es'
@@ -78,6 +60,15 @@ const itemsAll: Item[] = [
     alt: 'CRYSTALLIZE',
     smallCaps: true,
     width: 'wide',
+  },
+  {
+    label: 'ai-Vegapedia',
+    sideTag: lang === 'es' ? 'Diccionario.' : lang === 'ja' ? '辞書' :'Dictionary.',
+    href: `${prefix}vegapedia/`,
+    img: `${base}images/bento-vegapedia.png`,
+    alt: 'ai-Vegapedia',
+    smallCaps: false,
+    width: 'narrow',
   },
 ];
 
