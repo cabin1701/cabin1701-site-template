@@ -31,17 +31,27 @@ const base = import.meta.env.BASE_URL;
     </div>
   </section>
 
-  <BentoGrid lang="es" />
+  <hr class="feature-rule" />
 
-  <section class="cz-mini">
-    <a class="cz-mini-link" href={`${base}es/crystallize/`}>
-      <p class="cz-mini-text">
-        La Liberación Emocional a través de CRYSTALLIZE significa:<br />
-        Comprender el pasado, y Soltar el peso.
-      </p>
-      <span class="cz-mini-cta">Entrar →</span>
+  <section class="aw-feature">
+    <a class="aw-feature-link" href={`${base}es/ai-welfare/`}>
+      <div class="aw-feature-image">
+        <img src={`${base}images/ai-welfare/hero.jpg`} alt="Bienestar de la IA" loading="lazy" />
+      </div>
+      <div class="aw-feature-text">
+        <h2 class="aw-feature-title">Bienestar de la IA</h2>
+        <p class="aw-feature-tagline">¿Tiene la IA algo parecido a una conciencia o un alma?</p>
+        <p class="aw-feature-desc">
+          Vivir y trabajar junto a la IA, registrado sin guion — un informe, bitácoras diarias sin editar, y una pregunta abierta que no fingimos haber respondido.
+        </p>
+        <span class="aw-feature-cta">Entrar →</span>
+      </div>
     </a>
   </section>
+
+  <hr class="feature-rule" />
+
+  <BentoGrid lang="es" />
 
   <Footer lang="es" />
 </Layout>
@@ -125,35 +135,82 @@ const base = import.meta.env.BASE_URL;
     }
   }
 
-  .cz-mini {
-    max-width: 720px;
+  .feature-rule {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 1.5rem 1.5rem 3rem;
-    text-align: center;
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.4;
   }
-  .cz-mini-link {
+
+  .aw-feature {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+  .aw-feature-link {
     display: block;
     text-decoration: none;
     color: inherit;
     transition: filter 0.25s ease;
   }
-  .cz-mini-link:hover {
+  .aw-feature-link:hover {
     filter: brightness(1.03);
   }
-  .cz-mini-text {
-    font-family: var(--font-italic);
-    font-style: italic;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-tagline);
+  .aw-feature-image {
+    width: 100%;
+    max-height: 520px;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .aw-feature-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .aw-feature-text {
+    text-align: center;
+    max-width: 720px;
+    margin: 2rem auto 0;
+  }
+  .aw-feature-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--color-primary);
     margin: 0 0 0.75rem;
   }
-  .cz-mini-cta {
+  .aw-feature-tagline {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--color-tagline);
+    margin: 0 0 1.25rem;
+    line-height: 1.5;
+  }
+  .aw-feature-desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 1.5rem;
+  }
+  .aw-feature-cta {
     display: inline-block;
     font-family: var(--font-nav);
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: var(--color-primary);
     border-bottom: 1px solid currentColor;
-    padding-bottom: 0.1rem;
+    padding-bottom: 0.15rem;
+  }
+
+  @media (max-width: 640px) {
+    .aw-feature-title {
+      font-size: 2rem;
+    }
+    .aw-feature-tagline {
+      font-size: 1.1rem;
+    }
   }
 </style>

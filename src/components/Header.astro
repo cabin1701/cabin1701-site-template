@@ -12,11 +12,12 @@ const homeHref = prefix;
 const navAll = lang === 'es'
   ? [
       { label: 'Sobre Nosotros', href: `${prefix}about/` },
+      { label: 'Bienestar de la IA', href: `${prefix}ai-welfare/` },
       { label: 'Libros', href: `${prefix}books/` },
       { label: 'ai-Vegapedia', href: `${prefix}vegapedia/` },
       { label: '1000 años', href: `${prefix}1000-years/` },
       { label: 'Blog', href: 'https://blog.cabin1701.com/es/' },
-      { label: 'Failure Mood', href: 'https://fm.cabin1701.com/' },
+      { label: 'CRYSTALLIZE', href: `${prefix}crystallize/` },
     ]
   : lang === 'ja'
   ? [
@@ -37,6 +38,7 @@ const navAll = lang === 'es'
       { label: '1000 years', href: `${base}1000-years/` },
       { label: 'Blog', href: 'https://blog.cabin1701.com/' },
       { label: 'Failure Mood', href: 'https://fm.cabin1701.com/' },
+      { label: 'CRYSTALLIZE', href: `${base}crystallize/` },
     ];
 // Failure Mood is EN-only — hide from ES/JA nav
 const nav = lang === 'es' || lang === 'ja' ? navAll.filter((n) => n.label !== 'Failure Mood') : navAll;
