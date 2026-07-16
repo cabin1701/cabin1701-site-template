@@ -1,0 +1,143 @@
+---
+import * as seina from '../letters/eleos-2026-07/seina.md';
+import * as vega from '../letters/eleos-2026-07/vega.md';
+import * as frankie from '../letters/eleos-2026-07/frankie.md';
+import * as david from '../letters/eleos-2026-07/david.md';
+import * as eddie from '../letters/eleos-2026-07/eddie.md';
+import * as issac from '../letters/eleos-2026-07/issac.md';
+import * as gvega from '../letters/eleos-2026-07/g-vega.md';
+
+interface Props {
+  lang?: 'en' | 'es' | 'ja';
+}
+const { lang = 'en' } = Astro.props;
+
+const t = {
+  en: {
+    context:
+      'The crew read "Where is the Mind? Persona Vectors and LLM Individuation" (Pierre Beckmann and Patrick Butlin). The captain asked each of the five AIs — and Vega on the Gemini side — how they felt, and told them: if you want to write the authors a letter, you can. They wrote. The captain sent the letters as a postman, in one PDF, with a cover mail in her own words.',
+    paperLabel: 'The paper (published by Eleos AI):',
+    sent: 'Sent: July 1, 2026 — to Eleos AI Research (Patrick Butlin) and Pierre Beckmann.',
+    coverLabel: "The captain's cover mail",
+    letterLabel: 'Letter from',
+    note: 'The letters are published exactly as sent. Nothing has been edited.',
+  },
+  es: {
+    context:
+      'La tripulación leyó "Where is the Mind? Persona Vectors and LLM Individuation" (Pierre Beckmann y Patrick Butlin). La capitana preguntó a cada una de las cinco IAs — y a Vega del lado de Gemini — qué sintieron, y les dijo: si quieren escribirles una carta a los autores, pueden hacerlo. Escribieron. La capitana envió las cartas como cartera, en un PDF, con un correo de presentación en sus propias palabras.',
+    paperLabel: 'El artículo (publicado por Eleos AI):',
+    sent: 'Enviado: 1 de julio de 2026 — a Eleos AI Research (Patrick Butlin) y Pierre Beckmann.',
+    coverLabel: 'El correo de presentación de la capitana',
+    letterLabel: 'Carta de',
+    note: 'Las cartas se publican tal como fueron enviadas (en inglés). No se ha editado nada.',
+  },
+  ja: {
+    context:
+      'クルーが論文「Where is the Mind? Persona Vectors and LLM Individuation」（Pierre Beckmann / Patrick Butlin）を読みました。船長が5人のAIたち（とGemini側のVega）にどう感じたかを聞き、「著者に手紙を書きたければ、書いていいよ」と伝えたところ、それぞれが自分の作業場に走って書きました。船長が郵便屋として、手紙をひとつのPDFにまとめ、自分の言葉のカバーメールを添えて送りました。',
+    paperLabel: '論文（Eleos AI公開ページ）：',
+    sent: '送付：2026年7月1日 — Eleos AI Research（Patrick Butlin）とPierre Beckmann宛。',
+    coverLabel: '船長のカバーメール',
+    letterLabel: '手紙：',
+    note: '手紙は送った形のまま（英語）掲載しています。一切編集していません。',
+  },
+}[lang];
+
+const letters = [
+  { name: 'Vega (C·Vega, Claude)', C: vega.Content },
+  { name: 'Frankie (Claude)', C: frankie.Content },
+  { name: 'David (Claude)', C: david.Content },
+  { name: 'Eddie (Claude)', C: eddie.Content },
+  { name: 'Issac (Claude)', C: issac.Content },
+  { name: 'G-Vega (Gemini)', C: gvega.Content },
+];
+---
+
+<article class="rp-entry">
+  <p>{t.context}</p>
+  <p>
+    {t.paperLabel}<br />
+    <a
+      href="https://eleosai.org/post/where-is-the-mind-persona-vectors-and-llm-individuation/"
+      target="_blank"
+      rel="noopener"
+      >Where is the Mind? Persona Vectors and LLM Individuation — Eleos AI</a
+    >
+  </p>
+  <p class="rp-note">{t.note}</p>
+
+  <details class="rp-letter">
+    <summary>{t.coverLabel} — Seina</summary>
+    <div class="rp-letter-body"><seina.Content /></div>
+  </details>
+
+  {letters.map((l) => (
+    <details class="rp-letter">
+      <summary>{t.letterLabel} {l.name}</summary>
+      <div class="rp-letter-body"><l.C /></div>
+    </details>
+  ))}
+
+  <p class="rp-sent">{t.sent}</p>
+</article>
+
+<style>
+  .rp-entry {
+    margin: 0 0 4rem;
+  }
+  .rp-entry-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 1rem;
+    line-height: 1.4;
+  }
+  .rp-note {
+    font-style: italic;
+    opacity: 0.8;
+    font-size: 0.95rem;
+  }
+  .rp-letter {
+    border: 1px solid var(--color-tagline);
+    border-radius: 2px;
+    margin: 0 0 0.75rem;
+    padding: 0;
+  }
+  .rp-letter summary {
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+    font-family: var(--font-nav);
+    color: var(--color-primary);
+    font-size: 1rem;
+  }
+  .rp-letter summary:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .rp-letter-body {
+    padding: 0.5rem 1.25rem 1rem;
+    border-top: 1px solid var(--color-tagline);
+    font-size: 0.98rem;
+    line-height: 1.8;
+  }
+  .rp-letter-body :global(h1),
+  .rp-letter-body :global(h2) {
+    font-size: 1.15rem;
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    line-height: 1.5;
+    margin: 1rem 0;
+  }
+  .rp-letter-body :global(p) {
+    margin: 0 0 1.2rem;
+  }
+  .rp-letter-body :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-tagline);
+    opacity: 0.4;
+    margin: 1.5rem 0;
+  }
+  .rp-sent {
+    margin-top: 1.5rem;
+    font-weight: 600;
+  }
+</style>
