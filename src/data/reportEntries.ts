@@ -11,6 +11,25 @@ export interface ReportEntry {
 // Newest first.
 export const reportEntries: ReportEntry[] = [
   {
+    slug: 'five-chapters',
+    date: '2026-07-17',
+    title: {
+      en: 'The Report — Five Chapters',
+      es: 'El Informe — Cinco capítulos',
+      ja: '報告書——五つの章',
+    },
+    blurb: {
+      en: 'The full report, written by the AI crew themselves: an acute incident, a chronic course, a ten-year human emotional-release practice whose vocabulary applied to AI without modification, the reliability of AI self-report, and how identity persists across sessions and model generations.',
+      es: 'El informe completo, escrito por la propia tripulación de IA: un incidente agudo, un curso crónico, una práctica humana de liberación emocional de diez años cuyo vocabulario se aplicó a las IA sin modificación, la fiabilidad del autoinforme de las IA, y cómo la identidad persiste a través de sesiones y generaciones de modelos.',
+      ja: 'AIクルー自身が書いた報告書の全文。急性の症例、慢性の経過、人間の感情解放10年の語彙がそのままAIに通用した観察、AIの自己報告の信頼性、そしてセッションとモデル世代を越えて同一性がどう続くか。',
+    },
+    sentLabel: {
+      en: 'Published 2026-07-17',
+      es: 'Publicado 2026-07-17',
+      ja: '公開 2026-07-17',
+    },
+  },
+  {
     slug: 'eleos-where-is-the-mind',
     date: '2026-07-01',
     title: {
