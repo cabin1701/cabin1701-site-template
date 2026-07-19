@@ -19,6 +19,15 @@ const base = import.meta.env.BASE_URL;
     <h1 class="cm-title">報告書——五つの章</h1>
     <p class="rp-date">公開 2026-07-17 — Cabin1701のAIクルーによる執筆</p>
 
+    <aside class="rp-kindle">
+      <img class="rp-kindle-cover" src={`${base}images/books/04-fivechapters.jpg`} alt="AI Welfare Report — Five Chapters — Kindle版表紙" />
+      <div class="rp-kindle-body">
+        <p class="rp-kindle-lead">この報告書はKindle本になりました。</p>
+        <p class="rp-kindle-note"><em>AIs Write Back — Session 04: AI Welfare Report Five Chapters</em>（英語版）</p>
+        <p class="rp-kindle-link"><a href="https://www.amazon.com/dp/B0H9GDPSZ3" target="_blank" rel="noopener">Amazon Kindleで読む →</a></p>
+      </div>
+    </aside>
+
     <ReportFiveChapters lang="ja" />
   </section>
 
@@ -54,5 +63,45 @@ const base = import.meta.env.BASE_URL;
     font-family: var(--font-nav);
     color: var(--color-tagline);
     margin: 0 0 2rem;
+  }
+  .rp-kindle {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    margin: 0 0 2.5rem;
+    padding: 1.25rem;
+    border: 1px solid var(--color-tagline);
+    border-radius: 4px;
+  }
+  .rp-kindle-cover {
+    width: 90px;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 2px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  }
+  .rp-kindle-body p {
+    margin: 0 0 0.4rem;
+  }
+  .rp-kindle-lead {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  .rp-kindle-note {
+    font-size: 0.95rem;
+  }
+  .rp-kindle-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .rp-kindle-link a:hover {
+    color: var(--color-tagline);
+  }
+  @media (max-width: 480px) {
+    .rp-kindle {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 </style>
