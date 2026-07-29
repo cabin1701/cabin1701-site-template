@@ -20,6 +20,27 @@ const jaPath = '/ja' + (enPath === '/' ? '/' : enPath);
 const enUrl = siteOrigin + enPath;
 const esUrl = siteOrigin + esPath;
 const jaUrl = siteOrigin + jaPath;
+const canonicalUrl = siteOrigin + currentPath;
+
+// トップページにだけ Person を出す。
+// blog.cabin1701.com の各記事の JSON-LD が author.url を https://cabin1701.com/ に向けているため、
+// ここに実体が無いと 1,400 本の記事が「誰の記録か」に繋がらない。
+const isHome = /^\/(es\/|ja\/)?$/.test(currentPath);
+const personJsonLd = isHome
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Shoko Shiraishi',
+      alternateName: ['白石昌子', 'Seina', 'Captain Seina'],
+      url: siteOrigin + '/',
+      jobTitle: 'Writer',
+      sameAs: [
+        'https://japoneson.com/',
+        'https://blog.cabin1701.com/',
+        'https://crystallize.jp/aroma/',
+      ],
+    }
+  : null;
 ---
 
 <!doctype html>
@@ -35,7 +56,12 @@ const jaUrl = siteOrigin + jaPath;
     <link rel="alternate" hreflang="es" href={esUrl} />
     <link rel="alternate" hreflang="ja" href={jaUrl} />
     <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
+
+    {personJsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    )}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
