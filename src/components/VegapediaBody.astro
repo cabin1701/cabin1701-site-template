@@ -177,7 +177,12 @@ const vegapediaJsonLd = {
   description: heroSub,
   inLanguage: lang,
   url: `${SITE}${PATH[lang]}`,
-  creator: { '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'ai-CABIN 1701' },
+  creator: {
+    '@type': 'Organization',
+    '@id': `${SITE}/#organization`,
+    name: 'ai-CABIN 1701',
+    url: `${SITE}/`,
+  },
   sameAs: (['ja', 'en', 'es'] as const)
     .filter((l) => l !== lang)
     .map((l) => `${SITE}${PATH[l]}`),

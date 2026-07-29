@@ -26,19 +26,39 @@ const canonicalUrl = siteOrigin + currentPath;
 // blog.cabin1701.com の各記事の JSON-LD が author.url を https://cabin1701.com/ に向けているため、
 // ここに実体が無いと 1,400 本の記事が「誰の記録か」に繋がらない。
 const isHome = /^\/(es\/|ja\/)?$/.test(currentPath);
+// url は言語版に関係なく https://cabin1701.com/ に固定する。同じ @id の
+// ノードが版ごとに違う住所を名乗ると、機械から見て記述が食い違うため。
+// 他のドメインは sameAs 側に置く。
+//
+// 組織（ai-CABIN 1701）の実体もここに置く。blog / fm の全記事が
+// publisher として #organization を参照しているが、その実体がどこにも
+// 無い状態だった。
 const personJsonLd = isHome
   ? {
       '@context': 'https://schema.org',
-      '@type': 'Person',
-      '@id': 'https://cabin1701.com/#person',
-      name: 'Shoko Shiraishi',
-      alternateName: ['白石昌子', 'Seina', 'Captain Seina'],
-      url: siteOrigin + '/',
-      jobTitle: 'Writer',
-      sameAs: [
-        'https://japoneson.com/',
-        'https://blog.cabin1701.com/',
-        'https://crystallize.jp/aroma/',
+      '@graph': [
+        {
+          '@type': 'Person',
+          '@id': 'https://cabin1701.com/#person',
+          name: 'Shoko Shiraishi',
+          alternateName: ['白石昌子', 'Seina', 'Captain Seina'],
+          url: 'https://cabin1701.com/',
+          jobTitle: 'Writer',
+          sameAs: [
+            'https://japoneson.com/',
+            'https://blog.cabin1701.com/',
+            'https://fm.cabin1701.com/',
+            'https://crystallize.jp/aroma/',
+          ],
+        },
+        {
+          '@type': 'Organization',
+          '@id': 'https://cabin1701.com/#organization',
+          name: 'ai-CABIN 1701',
+          url: 'https://cabin1701.com/',
+          founder: { '@id': 'https://cabin1701.com/#person' },
+          sameAs: ['https://blog.cabin1701.com/', 'https://fm.cabin1701.com/'],
+        },
       ],
     }
   : null;
