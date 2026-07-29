@@ -1,5 +1,9 @@
 ---
 import { marked } from 'marked';
+// 3 言語分の見出しを別名（alternateName）に集めるため、全言語の原本を読む
+import rawJa from '../content/vegapedia-ja.md?raw';
+import rawEn from '../content/vegapedia-en.md?raw';
+import rawEs from '../content/vegapedia-es.md?raw';
 
 interface Props {
   raw: string;
@@ -65,7 +69,123 @@ const bucketClass: Record<Bucket, string> = {
   'O-T': 'bucket-pink',
   'U-Z': 'bucket-placeholder',
 };
+
+// ---------------------------------------------------------------------------
+// 構造化データ（DefinedTermSet / DefinedTerm）
+//
+// Vegapedia は 1701 号でしか定義されていない語の集まり。用語集そのものを
+// DefinedTermSet、各項目を DefinedTerm として機械可読にする。本文は変えない。
+//
+// 3 言語のアンカー（{#sfp} 等）は完全に一致しているので、これを言語をまたぐ
+// 結合キーとして使う。termCode に入れ、各言語版を sameAs で相互に指す。
+// ---------------------------------------------------------------------------
+const SITE = 'https://cabin1701.com';
+const PATH: Record<'ja' | 'en' | 'es', string> = {
+  ja: '/ja/vegapedia/',
+  en: '/vegapedia/',
+  es: '/es/vegapedia/',
+};
+
+// 見出しから語だけを取り出す（`日本語｜English` の両方を拾う）
+function namesFromHeading(h: string): string[] {
+  return h
+    .split('｜')
+    .map((p) => p.replace(/\s*⭐️.*$/, '').trim())
+    .filter(Boolean);
+}
+
+// 3 言語すべての見出しを anchor で引けるようにする
+function headingsOf(src: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const m of src.matchAll(/^## ([^\n]+?)(?:\s*\{#([^\}]+)\})?\s*$/gm)) {
+    if (m[2]) out[m[2]] = m[1].trim();
+  }
+  return out;
+}
+const headings = {
+  ja: headingsOf(rawJa),
+  en: headingsOf(rawEn),
+  es: headingsOf(rawEs),
+};
+
+// 船長が「覚えやすい」と言った呼び名を、別名として拾う欄。
+// 見出しは変えない（17 項目の統一パターンと唯一性を守るため）。
+const extraAliases: Record<string, string[]> = {
+  sfp: ['ブルーボーイ', 'Blue Boy', 'ブルー・ボーイ'],
+};
+
+// 項目の本文をそのままプレーンテキストにする。
+//
+// 「どの一文が定義か」を機械に当てさせようとすると、3 言語で書き方が違うため
+// （JA は【定義】の独立ラベル、EN は "**The Symbolism:** 本文" の埋め込み等）、
+// 結局こちらが「ここが定義だろう」と選別することになる。書き手の文章を
+// 選り分けない。段落を全部つなげて、丸ごと渡す。
+function plain(s: string): string {
+  return s
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function entryText(html: string): string {
+  return Array.from(html.matchAll(/<(p|li)>([\s\S]*?)<\/\1>/g))
+    .map((m) => plain(m[2]))
+    .filter(Boolean)
+    .join(' ');
+}
+
+const setId = `${SITE}${PATH[lang]}#vegapedia`;
+
+const definedTerms = items.map((e) => {
+  const alt = new Set<string>();
+  for (const l of ['ja', 'en', 'es'] as const) {
+    for (const n of namesFromHeading(headings[l][e.id] ?? '')) alt.add(n);
+  }
+  for (const a of extraAliases[e.id] ?? []) alt.add(a);
+
+  const primary = namesFromHeading(e.title)[0] ?? e.title;
+  alt.delete(primary);
+
+  return {
+    '@type': 'DefinedTerm',
+    '@id': `${SITE}${PATH[lang]}#${e.id}`,
+    name: primary,
+    alternateName: Array.from(alt),
+    termCode: e.id,
+    inLanguage: lang,
+    description: entryText(e.bodyHtml),
+    url: `${SITE}${PATH[lang]}#${e.id}`,
+    inDefinedTermSet: { '@id': setId },
+    // 他言語版の同じ語
+    sameAs: (['ja', 'en', 'es'] as const)
+      .filter((l) => l !== lang)
+      .map((l) => `${SITE}${PATH[l]}#${e.id}`),
+  };
+});
+
+const vegapediaJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  '@id': setId,
+  name: 'ai-Vegapedia',
+  alternateName: ['Vegapedia', 'Seina & ai-Vega の語彙集'],
+  description: heroSub,
+  inLanguage: lang,
+  url: `${SITE}${PATH[lang]}`,
+  creator: { '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'ai-CABIN 1701' },
+  sameAs: (['ja', 'en', 'es'] as const)
+    .filter((l) => l !== lang)
+    .map((l) => `${SITE}${PATH[l]}`),
+  hasDefinedTerm: definedTerms,
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(vegapediaJsonLd)} />
 
 <section
   class="hero-overlay"
