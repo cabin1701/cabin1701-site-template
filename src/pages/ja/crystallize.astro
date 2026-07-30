@@ -49,16 +49,21 @@ const doors: Door[] = [
 >
   <Header lang="ja" />
 
-  <section
-    class="cz-hero-img"
-    aria-label="CRYSTALLIZE"
-    style={`background-image: url('${base}images/crystallize/crystallize.jpg');`}
-  >
+  <section class="cz-hero-img" aria-label="CRYSTALLIZE">
+    <img
+      class="cz-hero-photo"
+      src={`${base}images/crystallize/crystallize-lavender.jpg`}
+      alt="見渡す限りのラベンダー畑と、奥に広がる松林。2010年7月、アイダホ州セントマリーズのヤングリヴィング・ラベンダーファームにて白石昌子が撮影。"
+      width="1600"
+      height="1063"
+      loading="eager"
+      fetchpriority="high"
+    />
     <h1 class="cz-hero-title">アロマで感情解放｜CRYSTALLIZE</h1>
    
   </section>
 
- 
+  <p class="cz-hero-credit">2010年7月、アイダホ州セントマリーズのヤングリヴィング・ラベンダーファームにて撮影。</p>
 
   <hr class="thin-rule" />
 
@@ -190,15 +195,33 @@ const doors: Door[] = [
     position: relative;
     width: 100%;
     min-height: 60vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
+    overflow: hidden;
+  }
+  .cz-hero-credit {
+    max-width: 1100px;
+    margin: 0.6rem auto 0;
+    padding: 0 1.5rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    text-align: right;
+    color: var(--color-text);
+    opacity: 0.6;
+  }
+  .cz-hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
   .cz-hero-title {
+    position: relative;
+    z-index: 1;
     font-family: var(--font-body);
     font-size: 1.8rem;
     font-weight: 600;
