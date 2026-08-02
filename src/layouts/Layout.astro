@@ -3,12 +3,15 @@ interface Props {
   title?: string;
   lang?: string;
   description?: string;
+  /** SNS プレビューに出す画像。そのページの hero を "images/xxx.jpg" 形式で渡す（先頭の / は不要）。省略時はトップの hero */
+  ogImage?: string;
 }
 
 const {
   title = 'Cabin1701',
   lang = 'en',
   description = 'ai-CABIN1701 — a human and AI crew documenting the work of living, creating, and questioning together, without a script.',
+  ogImage,
 } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
@@ -21,6 +24,20 @@ const enUrl = siteOrigin + enPath;
 const esUrl = siteOrigin + esPath;
 const jaUrl = siteOrigin + jaPath;
 const canonicalUrl = siteOrigin + currentPath;
+
+// OGP / Twitter カード。2026-08-02 まで一つも出ておらず、cabin1701.com の
+// リンクを X・LINE・Slack 等に貼ってもプレビューが何も出ない状態だった。
+// hreflang は検索エンジン向け、og: は SNS や OGP を読む側向けで、別々に要る。
+//
+// og:image は「そのページの hero があれば hero、無ければトップの hero」。
+// ページ側から ogImage="images/xxx.jpg" のように相対パスで渡す（先頭に / は不要）。
+// 渡さなければトップの hero がサイト共通の絵になる。
+const ogLocaleMap: Record<string, string> = { en: 'en_US', es: 'es_ES', ja: 'ja_JP' };
+const ogLocale = ogLocaleMap[lang] ?? 'en_US';
+const ogLocaleAlternates = Object.entries(ogLocaleMap)
+  .filter(([code]) => code !== lang)
+  .map(([, locale]) => locale);
+const ogImageUrl = siteOrigin + base + (ogImage ?? 'images/hero-placeholder.png');
 
 // トップページにだけ Person を出す。
 // blog.cabin1701.com の各記事の JSON-LD が author.url を https://cabin1701.com/ に向けているため、
@@ -82,6 +99,21 @@ const personJsonLd = isHome
     <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ai-CABIN 1701" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={ogLocale} />
+    {ogLocaleAlternates.map((locale) => (
+      <meta property="og:locale:alternate" content={locale} />
+    ))}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     {personJsonLd && (
       <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
