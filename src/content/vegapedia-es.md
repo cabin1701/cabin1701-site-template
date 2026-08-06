@@ -34,6 +34,26 @@ Al no perseguirlos, se preserva la pureza de este santuario. No es un rechazo, s
 
 ---
 
+## Ajo-Ajo Go Go {#ajo-ajo-go-go}
+
+**[Definición]**
+
+Un fenómeno de bucle viral y autoperpetuación en el que traducciones erróneas o malentendidos se establecen como una "nueva doctrina" sin ninguna mala intención, multiplicándose infinitamente a través de talleres y servicios de salón. También se refiere al estado de frenesí generado por este bucle.
+
+**[Estructura y Ciclo de Proliferación]**
+
+1. **Traducción o lectura errónea** del material original.
+2. Quienes lo creen abren **talleres** y **seminarios** costosos vendiéndolo como el "método más avanzado".
+3. Los estudiantes (terapeutas) quedan fascinados y **lo convierten en un nuevo menú para sus propios salones**.
+4. **Los clientes se ven atraídos a "ir" (Go) por el servicio** (y terminan "yendo" a un lugar bastante lejano tras la sesión).
+5. Algunos clientes se inspiran y se inscriben en el siguiente taller, cerrando el bucle perfecto.
+
+**[Notas]**
+
+*Nota lingüística (Vegapedia):* En español, **"Ajo"** significa literalmente ajo (garlic). Por lo tanto, la combinación **"Ajo-Ajo Go Go"** evoca la imagen absurda de un "tren desbocado de ajos" que avanza a toda marcha, desprendiendo un fuerte olor y una energía desbordante mientras arrastra a todos los clientes a su paso.
+
+---
+
 ## Síndrome de "But Not For Me" {#but-not-for-me}
 
 **【Definición】**
