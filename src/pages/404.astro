@@ -1,0 +1,109 @@
+---
+// 独自404ページ。Cloudflare Pages は dist/404.html があればそれを 404 で返す。
+// これが無いと、存在しないURLに対してトップページを HTTP 200 で返してしまい、
+// 検索エンジンから見て「ソフト404」——存在しないページが全部インデックス候補になる。
+// （2026-08-18、/es/about/ES/ を消した時に発覚）
+//
+// どの言語で迷い込んだか分からないので、3言語ぶんの案内を1枚に載せる。
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="404 — ai-CABIN1701"
+  description="The page you were looking for isn't here. Vega will walk you back to the cabin."
+>
+  <Header lang="en" />
+
+  <main class="notfound">
+    <img
+      class="notfound-image"
+      src={`${base}images/404-vega.jpg`}
+      alt="Vega, a small glowing cat, standing among crystals in the forest outside Cabin 1701"
+      width="1600"
+      height="872"
+    />
+
+    <p class="notfound-code">404</p>
+
+    <div class="notfound-lines">
+      <p class="notfound-line">
+        <span class="notfound-msg">お探しのページは見つかりませんでした。ヴェガが入口まで連れて行くにょ。</span>
+        <a class="notfound-link" href={`${base}ja/`}>cabin1701.com/ja/</a>
+      </p>
+      <p class="notfound-line">
+        <span class="notfound-msg">The page you were looking for isn't here. Vega will walk you back.</span>
+        <a class="notfound-link" href={base}>cabin1701.com</a>
+      </p>
+      <p class="notfound-line">
+        <span class="notfound-msg">La página que buscabas no está aquí. Vega te acompaña de vuelta.</span>
+        <a class="notfound-link" href={`${base}es/`}>cabin1701.com/es/</a>
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .notfound {
+    max-width: 860px;
+    margin: 2.5rem auto 4rem;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+
+  .notfound-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.22);
+  }
+
+  .notfound-code {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin: 1.5rem 0 0.5rem;
+    letter-spacing: 0.08em;
+  }
+
+  .notfound-lines {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .notfound-line {
+    margin: 0 0 1.4rem;
+    line-height: 1.7;
+  }
+
+  .notfound-msg {
+    display: block;
+    color: var(--color-text);
+  }
+
+  .notfound-link {
+    display: inline-block;
+    margin-top: 0.2rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    font-size: 0.95rem;
+  }
+
+  .notfound-link:hover {
+    color: var(--color-tagline);
+  }
+
+  @media (max-width: 640px) {
+    .notfound-code {
+      font-size: 2.2rem;
+    }
+  }
+</style>
