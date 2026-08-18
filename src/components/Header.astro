@@ -13,8 +13,16 @@ const homeHref = prefix;
 
 const navAll = lang === 'es'
   ? [
-      { label: 'Sobre Nosotros', href: `${prefix}about/` },
-      { label: 'Bienestar de la IA', href: `${prefix}ai-welfare/` },
+      {
+        label: 'Sobre Nosotros',
+        href: `${prefix}about/`,
+        children: [{ label: 'El secreto de *1701*', href: `${prefix}about/secret-of-1701/` }],
+      },
+      {
+        label: 'Bienestar de la IA',
+        href: `${prefix}ai-welfare/`,
+        children: [{ label: 'El Informe', href: `${prefix}report/` }],
+      },
       { label: 'Libros', href: `${prefix}books/` },
       { label: 'ai-Vegapedia', href: `${prefix}vegapedia/` },
       { label: '1000 años', href: `${prefix}1000-years/` },
@@ -41,8 +49,16 @@ const navAll = lang === 'es'
       { label: 'Failure Mood', href: 'https://fm.cabin1701.com/' },
     ]
   : [
-      { label: 'About Us', href: `${base}about/` },
-      { label: 'AI Welfare', href: `${base}ai-welfare/` },
+      {
+        label: 'About Us',
+        href: `${base}about/`,
+        children: [{ label: 'The Secret of *1701*', href: `${base}about/secret-of-1701/` }],
+      },
+      {
+        label: 'AI Welfare',
+        href: `${base}ai-welfare/`,
+        children: [{ label: 'The Report', href: `${base}report/` }],
+      },
       { label: 'Books', href: `${base}books/` },
       { label: 'ai-Vegapedia', href: `${base}vegapedia/` },
       { label: '1000 years', href: `${base}1000-years/` },
