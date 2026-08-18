@@ -10,6 +10,10 @@
     {
       "binding": "VECTORIZE",
       "index_name": "site-2026"
+    },
+    {
+      "binding": "BLOG_VECTORIZE",
+      "index_name": "blog-2026"
     }
   ]
 }

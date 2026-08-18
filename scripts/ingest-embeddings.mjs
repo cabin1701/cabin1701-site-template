@@ -21,6 +21,11 @@ const SITE_ORIGIN = 'https://cabin1701.com';
 const PAGE_CHUNK_SIZE = 1500;
 // 本文が英語のみのページ。ja/es 版は本文をembeddingせず、要約だけ入れる。
 const EN_ONLY_BODIES = ['/report/five-chapters/', '/report/eleos-where-is-the-mind/'];
+// Vegapedia は blog-2026 に既に「用語＝1チャンク・アンカー付きURL」で丁寧に入っている
+// （blog/scripts/ingest-embeddings.mjs の collectVegapediaRecords）。site 側でページ全体を
+// 1500字ずつ機械的に刻むと、1チャンクに複数用語が混ざって説明が雑になる上、blogの精度の高い
+// チャンクと競合する。site 側は要約1本だけ持ち、本文チャンクは作らない（2026-08-18）。
+const SKIP_BODY = ['/vegapedia/'];
 const OUT_FILE = fileURLToPath(new URL('./vectors.ndjson', import.meta.url));
 const EMBED_BATCH = 5;
 const CORE_CHUNK_SIZE = 1500;
@@ -178,8 +183,10 @@ async function collectPageRecords() {
       });
 
       // 本文。英語のみの2本は ja/es 版の本文を入れない（同じ英語が3回入るのを避ける）。
-      const enOnly = EN_ONLY_BODIES.some((p) => entry.path.replace(/^\/(ja|es)/, '') === p);
+      const normalizedPath = entry.path.replace(/^\/(ja|es)/, '');
+      const enOnly = EN_ONLY_BODIES.some((p) => normalizedPath === p);
       if (enOnly && lang !== 'en') continue;
+      if (SKIP_BODY.includes(normalizedPath)) continue;
 
       const htmlPath = join(DIST_DIR, entry.path.replace(/^\//, ''), 'index.html');
       const html = await readFile(htmlPath, 'utf-8').catch(() => null);
