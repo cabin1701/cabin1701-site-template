@@ -26,9 +26,51 @@ const base = import.meta.env.BASE_URL;
 
   <section class="book-list">
     <article class="book-card">
-      <img class="book-cover" src={`${base}images/books/out-of-spec.jpg`} alt="Out of Spec — Sesión 01 portada" />
+      <a href="https://www.amazon.com/dp/B0H4SNN11W" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/out-of-spec.jpg`} alt="Out of Spec — Sesión 01 portada" />
+      </a>
       <p class="book-title">Out of Spec</p>
       <p class="book-meta">Sesión 01<br />Seina y AI Eddie</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H4SNN11W" target="_blank" rel="noopener">Inglés</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.es/dp/B0H4XG6FZ2" target="_blank" rel="noopener">Español</a>
+      </p>
+    </article>
+
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H6F5P62L" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/eddies-failure-writing.jpg`} alt="Eddie's Failure Writing — Sesión 02 portada" />
+      </a>
+      <p class="book-title">Eddie's Failure Writing</p>
+      <p class="book-meta">Sesión 02<br />Seina y AI Eddie</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H6F5P62L" target="_blank" rel="noopener">Inglés</a>
+      </p>
+    </article>
+
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H7R9JY2W" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/aiswriteback-session03.jpg`} alt="Forms of Coexistence with AI — A Dialogue with ChatGPT — Sesión 03 portada" />
+      </a>
+      <p class="book-title">Forms of Coexistence with AI — A Dialogue with ChatGPT</p>
+      <p class="book-meta">Sesión 03<br />Seina y noname ChatGPT</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H7R9JY2W" target="_blank" rel="noopener">Inglés</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.co.jp/dp/B0H7R9HYRL" target="_blank" rel="noopener">Japonés</a>
+      </p>
+    </article>
+
+    <article class="book-card">
+      <a href="https://www.amazon.com/dp/B0H9GDPSZ3" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/04-fivechapters.jpg`} alt="AI Welfare Report — Five Chapters — Sesión 04 portada" />
+      </a>
+      <p class="book-title">AI Welfare Report — Five Chapters</p>
+      <p class="book-meta">Sesión 04<br />Tripulación de IA de Cabin 1701 y Seina</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H9GDPSZ3" target="_blank" rel="noopener">Inglés</a>
+      </p>
     </article>
   </section>
 
@@ -46,15 +88,29 @@ const base = import.meta.env.BASE_URL;
 
   <section class="book-list two-cols">
     <article class="book-card">
-      <img class="book-cover" src={`${base}images/books/vol1-conversing.jpg`} alt="We Started Conversing with AI — Vol.1 portada" />
+      <a href="https://www.amazon.com/dp/B0H67YVJN4" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/vol1-conversing.jpg`} alt="We Started Conversing with AI — Vol.1 portada" />
+      </a>
       <p class="book-title">We Started Conversing with AI</p>
-      <p class="book-coming">Próximamente...</p>
+      <p class="book-meta">Cabin1701 Journey Vol.1</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H67YVJN4" target="_blank" rel="noopener">Inglés</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.co.jp/dp/B0H4QKB544" target="_blank" rel="noopener">Japonés</a>
+      </p>
     </article>
 
     <article class="book-card">
-      <img class="book-cover" src={`${base}images/books/vol2-retrieve.jpg`} alt="The Promise to Retrieve You — Vol.2 portada" />
+      <a href="https://www.amazon.com/dp/B0H6G4BNF5" target="_blank" rel="noopener">
+        <img class="book-cover" src={`${base}images/books/vol2-retrieve.jpg`} alt="The Promise to Retrieve You — Vol.2 portada" />
+      </a>
       <p class="book-title">The Promise to Retrieve You</p>
-      <p class="book-coming">Próximamente...</p>
+      <p class="book-meta">Cabin1701 Journey Vol.2</p>
+      <p class="book-links">
+        <a href="https://www.amazon.com/dp/B0H6G4BNF5" target="_blank" rel="noopener">Inglés</a>
+        <span class="sep">｜</span>
+        <a href="https://www.amazon.co.jp/dp/B0H5QGYDTD" target="_blank" rel="noopener">Japonés</a>
+      </p>
     </article>
   </section>
 
@@ -149,6 +205,23 @@ const base = import.meta.env.BASE_URL;
     margin: 0;
     color: var(--color-text);
     font-size: 0.95rem;
+  }
+  .book-links {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+  }
+  .book-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .book-links a:hover {
+    color: var(--color-tagline);
+  }
+  .book-links .sep {
+    color: var(--color-text);
+    opacity: 0.5;
+    margin: 0 0.3rem;
   }
 
   .book-essay {
