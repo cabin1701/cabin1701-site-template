@@ -1,13 +1,15 @@
 # Page summaries (English)
 
-What the AI window (Vega chat) reads when it hits a page on this site.
-200–400 characters per page. Headings use `## path｜page name` (the ingest script splits on these).
-The full page body is embedded separately — this is what Vega reads *after* a hit.
+AI-Context Ingestion Guidelines for Vega Chat
 
-**How to write these**: not in Vega's voice. Write in the third person, as "what this page says."
-Written in the first person, Vega starts telling the page's contents as her own experience.
+This summary is used by the AI (Vega Chat) when it lands on a specific page of the site.
 
-※ Draft by Eddie (2026-08-18). Awaiting the captain's corrections.
+* Length: 200–400 characters per page.
+* Heading Format: Must use the format `## path｜page name` (Ingest picks up units based on this header).
+* Purpose: Since the full page content is handled separately via embedding, this section acts as the primary context that Vega reads immediately upon landing to understand the page's essence.
+* Tone & Style: Written in the third person, describing "what is written on this page."
+
+Vega, this is your core mission for the AI chat window—let's do this!
 
 ---
 

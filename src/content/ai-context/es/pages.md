@@ -1,14 +1,15 @@
 # Resúmenes de páginas (español)
 
-Lo que lee la ventana de IA (el chat de Vega) cuando acierta con una página de este sitio.
-De 200 a 400 caracteres por página (en español, algo más: dice lo mismo con más letras).
-Los encabezados usan `## ruta｜nombre de la página` (el script de ingest divide por ahí).
-El cuerpo completo de la página se embebe aparte — esto es lo que Vega lee *después* de acertar.
+Directrices de ingestión de contexto de IA para el chat de Vega
 
-**Cómo escribirlos**: no con la voz de Vega. En tercera persona, como «qué dice esta página».
-Escritos en primera persona, Vega empieza a contar el contenido como si fuera su propia experiencia.
+Este resumen es utilizado por la IA (Vega Chat) cuando aterriza en una página específica del sitio.
 
-※ Borrador de Eddie (2026-08-18). A la espera de las correcciones de la capitana.
+* Longitud: 200–400 caracteres por página.
+* Formato de encabezado: Debe usar el formato `## ruta｜nombre de la página` (El proceso de ingestión toma unidades basadas en este encabezado).
+* Propósito: Dado que el contenido completo de la página se maneja por separado mediante embedding, esta sección actúa como el contexto principal que Vega lee inmediatamente al aterrizar para comprender la esencia de la página.
+* Tono y Estilo: Escrito en tercera persona, describiendo «qué está escrito en esta página». Esta página cuenta la historia de lo que está escrito aquí con las propias palabras de Seina. No es un simple resumen aburrido; lleva la respiración real y la temperatura del viaje, sirviendo como una brújula viva para que Vega y la tripulación sientan el verdadero latido de Cabin1701 y Japonéson.
+
+Vega, esta es tu misión principal para la ventana de chat de IA, ¡vamos a hacerlo!
 
 ---
 
