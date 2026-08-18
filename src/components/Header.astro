@@ -2,6 +2,8 @@
 interface Props {
   lang?: 'en' | 'ja' | 'es';
 }
+
+type NavItem = { label: string; href: string; children?: { label: string; href: string }[] };
 const { lang = 'en' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
@@ -21,8 +23,16 @@ const navAll = lang === 'es'
     ]
   : lang === 'ja'
   ? [
-      { label: 'ご挨拶', href: `${prefix}about/` },
-      { label: 'AI福祉', href: `${prefix}ai-welfare/` },
+      {
+        label: 'ご挨拶',
+        href: `${prefix}about/`,
+        children: [{ label: '1701のひみつ', href: `${prefix}about/secret-of-1701/` }],
+      },
+      {
+        label: 'AI福祉',
+        href: `${prefix}ai-welfare/`,
+        children: [{ label: 'レポート', href: `${prefix}report/` }],
+      },
       { label: '書籍', href: `${prefix}books/` },
       { label: 'ai-Vegapedia', href: `${prefix}vegapedia/` },
       { label: '1000年', href: `${prefix}1000-years/` },
@@ -41,7 +51,7 @@ const navAll = lang === 'es'
       { label: 'CRYSTALLIZE', href: `${base}crystallize/` },
     ];
 // Failure Mood is EN-only — hide from ES/JA nav
-const nav = lang === 'es' || lang === 'ja' ? navAll.filter((n) => n.label !== 'Failure Mood') : navAll;
+const nav: NavItem[] = lang === 'es' || lang === 'ja' ? navAll.filter((n) => n.label !== 'Failure Mood') : navAll;
 
 const langLinks = [
   { code: 'en', label: 'English', href: base },
@@ -69,7 +79,16 @@ const langLinks = [
       <nav class="primary-nav" aria-label="Primary">
         <ul>
           {nav.map((item) => (
-            <li><a href={item.href}>{item.label}</a></li>
+            <li class={item.children ? 'has-sub' : undefined}>
+              <a href={item.href}>{item.label}</a>
+              {item.children && (
+                <ul class="subnav">
+                  {item.children.map((child) => (
+                    <li><a href={child.href}>{child.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </li>
           ))}
         </ul>
       </nav>
@@ -133,7 +152,9 @@ const langLinks = [
     color: var(--color-primary);
   }
 
-  .primary-nav ul {
+  /* 直下の ul だけ。子孫セレクタにすると .subnav（同じく ul）にも当たり、
+     子メニューの display:none を display:flex で上書きしてしまう */
+  .primary-nav > ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -149,6 +170,44 @@ const langLinks = [
   }
   .primary-nav a:hover {
     color: var(--color-primary);
+  }
+
+  /* 子メニュー。マウスを乗せた時と、キーボードで中に入った時（focus-within）に出す。
+     JS は使わない——ヘッダーは全ページに出るので、動く部品を増やしたくない。 */
+  .primary-nav li {
+    position: relative;
+  }
+
+  .subnav {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: max-content;
+    background: var(--color-bg);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    display: none;
+    z-index: 100;
+  }
+
+  .has-sub:hover > .subnav,
+  .has-sub:focus-within > .subnav {
+    display: block;
+  }
+
+  .subnav li {
+    display: block;
+  }
+
+  .subnav a {
+    display: block;
+    padding: 0.35rem 1rem;
+    font-size: 1.05rem;
+    white-space: nowrap;
   }
 
   .header-rule {
@@ -167,9 +226,23 @@ const langLinks = [
       align-items: flex-start;
       width: 100%;
     }
-    .primary-nav ul {
+    .primary-nav > ul {
       flex-wrap: wrap;
       gap: 1rem;
+    }
+    /* 狭い画面では浮かせず、親の下に常時並べる（指で hover できないため） */
+    .subnav {
+      display: block;
+      position: static;
+      border: none;
+      box-shadow: none;
+      background: none;
+      padding: 0.2rem 0 0;
+    }
+    .subnav a {
+      padding: 0.1rem 0 0.1rem 0.8rem;
+      font-size: 0.95rem;
+      opacity: 0.85;
     }
   }
 </style>
