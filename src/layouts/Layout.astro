@@ -1,4 +1,6 @@
 ---
+import VegaChat from '../components/VegaChat.astro';
+
 interface Props {
   title?: string;
   lang?: string;
@@ -128,6 +130,7 @@ const personJsonLd = isHome
   </head>
   <body>
     <slot />
+    <VegaChat lang={lang} />
   </body>
 </html>
 

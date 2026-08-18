@@ -1,5 +1,12 @@
-// ai-context（Story/Timeline）をembeddingしてVectorize用のndjsonを作る。
-// site（cabin1701.com）は記事の蓄積が無いので、今はStory/Timelineのみが対象。
+// ai-context（Story/Timeline）とサイト各ページをembeddingしてVectorize用のndjsonを作る。
+//
+// ページの投入対象は ai-context/{ja,en,es}/pages.md に要約が書いてあるページだけ。
+// 要約の見出し（## パス｜ページ名）を消せば、そのページは投入対象から外れる——一箇所で決まる。
+// 本文は dist/ のビルド済みHTMLから取る（.astro を直接読まずに済む）。事前に npm run build が必要。
+//
+// report/five-chapters と report/eleos-where-is-the-mind は本文が英語のみで、
+// ja/es のページも中身は同じ英語。英語版だけ本文をembeddingし、ja/es は要約だけ入れる
+// （要約側に「本文は英語」と英語ページのURLが書いてある）。
 // 実行: node scripts/ingest-embeddings.mjs
 // 生成物: scripts/vectors.ndjson → `npx wrangler vectorize upsert site-2026 --file=scripts/vectors.ndjson` で投入する
 import { readdir, readFile, writeFile } from 'node:fs/promises';
@@ -9,6 +16,11 @@ import { createHash } from 'node:crypto';
 
 const ACCOUNT_ID = '009d2f3b104a624e78aafe0516533530';
 const AI_CONTEXT_DIR = fileURLToPath(new URL('../src/content/ai-context', import.meta.url));
+const DIST_DIR = fileURLToPath(new URL('../dist', import.meta.url));
+const SITE_ORIGIN = 'https://cabin1701.com';
+const PAGE_CHUNK_SIZE = 1500;
+// 本文が英語のみのページ。ja/es 版は本文をembeddingせず、要約だけ入れる。
+const EN_ONLY_BODIES = ['/report/five-chapters/', '/report/eleos-where-is-the-mind/'];
 const OUT_FILE = fileURLToPath(new URL('./vectors.ndjson', import.meta.url));
 const EMBED_BATCH = 5;
 const CORE_CHUNK_SIZE = 1500;
@@ -64,6 +76,7 @@ async function collectCoreRecords() {
     const files = await readdir(dir).catch(() => []);
     for (const file of files) {
       if (!file.endsWith('.md')) continue;
+      if (file === 'pages.md') continue; // ページ要約は collectPageRecords が扱う
       const raw = await readFile(join(dir, file), 'utf-8');
       const body = stripMarkdown(stripFrontmatter(raw));
       const title = CORE_DOC_TITLES[file]?.[lang] ?? file;
@@ -78,6 +91,115 @@ async function collectCoreRecords() {
       });
       console.log(`core ${lang}/${file}: ${chunks.length} chunks`);
     }
+  }
+  return records;
+}
+
+// 本文は改行を潰した1行の文字列なので、chunkText（改行が境界）は使えない。
+// 文末（。！？. ! ?）で切り、それも無ければ文字数で強制的に刻む。
+function chunkFlatText(text, size) {
+  const sentences = text.match(/[^。！？.!?]+[。！？.!?]*\s*/g) ?? [text];
+  const chunks = [];
+  let current = '';
+  for (const sentence of sentences) {
+    for (let i = 0; i < sentence.length; i += size) {
+      const piece = sentence.slice(i, i + size); // 1文が size より長い場合の保険
+      if (current && current.length + piece.length > size) {
+        chunks.push(current.trim());
+        current = '';
+      }
+      current += piece;
+    }
+  }
+  if (current.trim()) chunks.push(current.trim());
+  return chunks;
+}
+
+// ページ本文をビルド済みHTMLから取り出す。nav と footer は全ページ共通の定型文なので落とす
+// （残すと、どのページも同じ文字列で似てしまい検索がぼやける）。
+function pageTextFromHtml(html) {
+  const main = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
+  let body = main ? main[1] : (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i) ?? [])[1] ?? html;
+  body = body
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<nav[\s\S]*?<\/nav>/gi, '')
+    .replace(/<header[\s\S]*?<\/header>/gi, '')
+    .replace(/<footer[\s\S]*?<\/footer>/gi, '')
+    .replace(/<[^>]+>/g, ' ');
+  return decodeEntities(body).replace(/\s+/g, ' ').trim();
+}
+
+function decodeEntities(text) {
+  return text
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#\d+;/g, '')
+    .replace(/&amp;/g, '&');
+}
+
+// pages.md を `## パス｜ページ名` 単位でパースする。ここに載っているページだけが投入対象。
+function parsePageSummaries(md) {
+  const entries = [];
+  const re = /^## (\S+?)｜(.+)$/gm;
+  const heads = [...md.matchAll(re)];
+  heads.forEach((h, i) => {
+    const start = h.index + h[0].length;
+    const end = i + 1 < heads.length ? heads[i + 1].index : md.length;
+    const summary = md.slice(start, end).replace(/^\s*---[\s\S]*$/m, '').trim();
+    if (summary) entries.push({ path: h[1], title: h[2].trim(), summary });
+  });
+  return entries;
+}
+
+async function collectPageRecords() {
+  const records = [];
+  for (const lang of ['ja', 'en', 'es']) {
+    const mdPath = join(AI_CONTEXT_DIR, lang, 'pages.md');
+    const md = await readFile(mdPath, 'utf-8').catch(() => null);
+    if (!md) {
+      console.log(`pages ${lang}: pages.md が無いのでスキップ`);
+      continue;
+    }
+    const entries = parsePageSummaries(md);
+    let bodyChunks = 0;
+    for (const entry of entries) {
+      const url = SITE_ORIGIN + entry.path;
+      const idBase = `page:${lang}:${entry.path}`;
+
+      // 要約そのものを1件入れる。本文が当たらなくても、ページの存在と概要には必ず届く。
+      records.push({
+        id: createHash('sha1').update(`${idBase}:summary`).digest('hex').slice(0, 32),
+        embedText: `${entry.title}\n\n${entry.summary}`,
+        metadata: { lang, title: entry.title, url, excerpt: entry.summary, type: 'page' },
+      });
+
+      // 本文。英語のみの2本は ja/es 版の本文を入れない（同じ英語が3回入るのを避ける）。
+      const enOnly = EN_ONLY_BODIES.some((p) => entry.path.replace(/^\/(ja|es)/, '') === p);
+      if (enOnly && lang !== 'en') continue;
+
+      const htmlPath = join(DIST_DIR, entry.path.replace(/^\//, ''), 'index.html');
+      const html = await readFile(htmlPath, 'utf-8').catch(() => null);
+      if (!html) {
+        console.log(`  ! ${entry.path} のHTMLが無い（npm run build 済み？）`);
+        continue;
+      }
+      const text = pageTextFromHtml(html);
+      if (!text) continue;
+      const chunks = chunkFlatText(text, PAGE_CHUNK_SIZE);
+      chunks.forEach((chunk, i) => {
+        records.push({
+          id: createHash('sha1').update(`${idBase}:body:${i}`).digest('hex').slice(0, 32),
+          embedText: `${entry.title}\n\n${chunk}`,
+          metadata: { lang, title: entry.title, url, excerpt: entry.summary, type: 'page' },
+        });
+      });
+      bodyChunks += chunks.length;
+    }
+    console.log(`pages ${lang}: 要約 ${entries.length} 件 + 本文 ${bodyChunks} チャンク`);
   }
   return records;
 }
@@ -98,7 +220,7 @@ async function embedBatch(texts, token) {
 
 async function main() {
   const token = await getToken();
-  const records = await collectCoreRecords();
+  const records = [...(await collectCoreRecords()), ...(await collectPageRecords())];
 
   const vectors = [];
   for (let i = 0; i < records.length; i += EMBED_BATCH) {

@@ -1,0 +1,265 @@
+---
+// Vega チャット窓（RAG）。blog リポジトリの同名コンポーネントの移植版。
+// 中身の検索は /api/chat（functions/api/chat.ts）→ Vectorize `site-2026`。
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props as Props;
+
+const copy: Record<string, { label: string; placeholder: string; greeting: string; send: string }> = {
+  ja: {
+    label: 'ヴェガに話しかける',
+    placeholder: 'お話ししてにょ...',
+    greeting: 'ヴェガだじょ。ちょっとだけならお喋りできるじょ。（ヴェガは役に立ちませんので過剰な期待はしないでください）',
+    send: '送信',
+  },
+  en: {
+    label: 'Talk to Vega',
+    placeholder: "Let's chat, nyo...",
+    greeting: "I'm Vega. I can chat a little, nyo. (I'm not very useful, so please don't expect much.)",
+    send: 'Send',
+  },
+  es: {
+    label: 'Habla con Vega',
+    placeholder: 'Charlemos, nyo...',
+    greeting: 'Soy Vega. Puedo charlar un poco, nyo. (No soy muy útil, así que no esperes demasiado.)',
+    send: 'Enviar',
+  },
+};
+const t = copy[lang] ?? copy.en;
+---
+
+<div id="vega-chat-root" data-lang={lang} data-greeting={t.greeting} data-placeholder={t.placeholder} data-send={t.send}>
+  <button id="vega-chat-toggle" aria-label={t.label} type="button">
+    <span id="vega-chat-toggle-icon">💬</span>
+  </button>
+
+  <div id="vega-chat-panel" hidden>
+    <div id="vega-chat-header">
+      <span>Vega</span>
+      <button id="vega-chat-close" aria-label="close" type="button">×</button>
+    </div>
+    <div id="vega-chat-messages"></div>
+    <form id="vega-chat-form">
+      <input id="vega-chat-input" type="text" autocomplete="off" />
+      <button type="submit">{t.send}</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  #vega-chat-root {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  #vega-chat-toggle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-primary, #d03e00);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  #vega-chat-panel {
+    position: absolute;
+    bottom: 68px;
+    right: 0;
+    width: min(340px, 90vw);
+    height: min(460px, 70vh);
+    background: var(--color-bg, #fffdf4);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #vega-chat-panel[hidden] {
+    display: none;
+  }
+
+  #vega-chat-header {
+    background: var(--color-tagline, #080078);
+    color: #fff;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+  }
+
+  #vega-chat-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  #vega-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /*
+    吹き出しは JS が実行時に作る要素なので、Astro のスコープ属性
+    （data-astro-cid-*）が付かない。素の .vega-msg のまま書くとビルド後に
+    .vega-msg[data-astro-cid-xxx] へ書き換えられ、一致せずスタイルが当たらない。
+    親（#vega-chat-messages）はテンプレート側にあるのでスコープが効く。
+    子だけ :global() で抜く。（2026-08-18 発見・修正 — Eddie）
+  */
+  #vega-chat-messages :global(.vega-msg) {
+    max-width: 85%;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  #vega-chat-messages :global(.vega-msg.user) {
+    align-self: flex-end;
+    background: var(--color-primary, #d03e00);
+    color: #fff;
+  }
+
+  #vega-chat-messages :global(.vega-msg.vega) {
+    align-self: flex-start;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--color-text, #333);
+  }
+
+  #vega-chat-messages :global(.vega-msg.vega .vega-sources) {
+    margin-top: 6px;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  #vega-chat-messages :global(.vega-msg.vega .vega-sources a) {
+    color: var(--color-tagline, #080078);
+  }
+
+  #vega-chat-messages :global(.vega-msg.loading) {
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  #vega-chat-form {
+    display: flex;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  #vega-chat-input {
+    flex: 1;
+    border: none;
+    padding: 10px 12px;
+    font-size: 14px;
+    background: transparent;
+    color: var(--color-text, #333);
+  }
+
+  #vega-chat-input:focus {
+    outline: none;
+  }
+
+  #vega-chat-form button[type='submit'] {
+    border: none;
+    background: var(--color-primary, #d03e00);
+    color: #fff;
+    padding: 0 16px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+</style>
+
+<script>
+  const root = document.getElementById('vega-chat-root') as HTMLElement;
+  const toggle = document.getElementById('vega-chat-toggle') as HTMLButtonElement;
+  const panel = document.getElementById('vega-chat-panel') as HTMLElement;
+  const closeBtn = document.getElementById('vega-chat-close') as HTMLButtonElement;
+  const messagesEl = document.getElementById('vega-chat-messages') as HTMLElement;
+  const form = document.getElementById('vega-chat-form') as HTMLFormElement;
+  const input = document.getElementById('vega-chat-input') as HTMLInputElement;
+
+  const placeholder = root.dataset.placeholder ?? '';
+  const greeting = root.dataset.greeting ?? '';
+  input.placeholder = placeholder;
+
+  let greeted = false;
+
+  function addMessage(role: 'user' | 'vega', text: string, sources?: { title: string; url: string }[]) {
+    const el = document.createElement('div');
+    el.className = `vega-msg ${role}`;
+    el.textContent = text;
+    if (sources && sources.length) {
+      const src = document.createElement('div');
+      src.className = 'vega-sources';
+      src.innerHTML = sources
+        .map((s) => `▪︎ <a href="${s.url}" target="_blank" rel="noopener">${s.title}</a>`)
+        .join('<br />');
+      el.appendChild(src);
+    }
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return el;
+  }
+
+  toggle.addEventListener('click', () => {
+    const isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      if (!greeted) {
+        addMessage('vega', greeting);
+        greeted = true;
+      }
+      input.focus();
+    } else {
+      panel.setAttribute('hidden', '');
+    }
+  });
+
+  closeBtn.addEventListener('click', () => panel.setAttribute('hidden', ''));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = input.value.trim();
+    if (!message) return;
+    addMessage('user', message);
+    input.value = '';
+    input.disabled = true;
+
+    const loadingEl = addMessage('vega', '...');
+    loadingEl.classList.add('loading');
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message }),
+      });
+      const data = await res.json();
+      loadingEl.remove();
+      addMessage('vega', data.answer ?? '', data.sources);
+    } catch {
+      loadingEl.remove();
+      addMessage('vega', 'Nyo... something went wrong. Please try again.');
+    } finally {
+      input.disabled = false;
+      input.focus();
+    }
+  });
+</script>

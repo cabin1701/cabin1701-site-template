@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# wrangler のローカル作業ファイル / ingest の生成物（blog と揃える）
+.wrangler/
+scripts/vectors.ndjson
