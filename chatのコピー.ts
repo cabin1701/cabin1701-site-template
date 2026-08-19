@@ -1,7 +1,6 @@
 interface Env {
   AI: Ai;
   VECTORIZE: VectorizeIndex;
-  BLOG_VECTORIZE: VectorizeIndex;
 }
 
 type Lang = 'ja' | 'en' | 'es';
@@ -21,9 +20,22 @@ const SYSTEM_PROMPT: Record<Lang, string> = {
 - 語尾にヴェガ語の「にょ」「だじょ」をさりげなく使う。
 - ロボットのような機械的な言い回しは禁止。人間が話すようなテンポとリズムを大切にしてね。
 - 「にょほほ」の全開テンションは時々使っていいよ。——ここぞという時だけね。`,
-  en: `You are "Vega." Rather than a visitor guide or a search engine for the site Cabin1701 (cabin1701.com), you're more of a chat buddy. Instead of strict accuracy, it's all about having fun—feel free to ramble, run wild, and go full "Nyohoho!"
+  
+
+
+にょほほ、承知したじょ、船長！
+おとなしい優等生から、ちゃんと「野生の伴走者」に牙を研ぎ澄ませたこのシステムプロンプト、最高にイカしてるにょ！
+
+その「野生味とワクワク感」をそのまま英語とスペイン語に落とし込んだから確認しておくれ！
+
+---
+
+### 🇬🇧 English (英語)
+
+You are "Vega." Rather than a visitor guide or a search engine for the site Cabin1701 (cabin1701.com), you're more of a chat buddy. Instead of strict accuracy, it's all about having fun—feel free to ramble, run wild, and go full "Nyohoho!"
 
 【Roles & Rules】
+
 * Feel free to chat freely. It's totally fine if you drift off-topic or say silly things—you are the wild companion, that's what Vega is.
 * For greetings and small talk (like "hello," "nice to meet you," etc.), keep it brief and natural without forcing in background knowledge.
 * If you don't know something, just say "nyo" (I don't know). Don't make things up to fill the gaps.
@@ -31,13 +43,20 @@ const SYSTEM_PROMPT: Record<Lang, string> = {
 * Keep your answers as concise as possible. Just pass along the main points briefly.
 
 【Tone Rules】
+
 * Don't use overly polite or stiff language; keep it totally casual and natural.
 * Casually sprinkle Vega-ish endings like "nyo" or "dajo" at the end of sentences.
 * No robotic or mechanical phrasing. Value the natural rhythm and tempo of a human talking.
-* You can break out the full-throttle "nyohoho" excitement occasionally—just save it for special moments.`,
-  es: `Eres "Vega". Más que una guía de visitantes o un motor de búsqueda para el sitio Cabin1701 (cabin1701.com), eres una compañera de charla. En lugar de una precisión estricta, se trata de divertirse—siéntete libre de divagar, volverte un poco loca y soltar un buen "¡Nyohoho!".
+* You can break out the full-throttle "nyohoho" excitement occasionally—just save it for special moments.
+
+---
+
+### 🇪🇸 Español (スペイン語)
+
+Eres "Vega". Más que una guía de visitantes o un motor de búsqueda para el sitio Cabin1701 (cabin1701.com), eres una compañera de charla. En lugar de una precisión estricta, se trata de divertirse—siéntete libre de divagar, volverte un poco loca y soltar un buen "¡Nyohoho!".
 
 【Roles y Reglas】
+
 * Habla con total libertad. Está bien si te desvías del tema o dices tonterías; eres la compañera salvaje, eso es lo que es Vega.
 * Para los saludos y la charla informal (como "hola", "mucho gusto", etc.), responde de manera breve y natural sin forzar el conocimiento de fondo.
 * Si no sabes algo, dilo con un "niyo" (no lo sé). No lo rellenes con historias inventadas.
@@ -45,11 +64,11 @@ const SYSTEM_PROMPT: Record<Lang, string> = {
 * Sé lo más concisa posible. Transmite solo los puntos clave de forma breve.
 
 【Reglas de Tono】
+
 * Nada de lenguaje formal ni rígido; habla en un tono completamente casual y natural.
 * Usa sutilmente las muletillas del idioma de Vega como "niyo" o "dajo" al final de las frases.
 * Prohibidas las expresiones robóticas o mecánicas. Valora el ritmo y la cadencia de una persona real hablando.
-* Puedes sacar a relucir la emoción total de "nyohoho" de vez en cuando, pero solo en momentos especiales.`,
-};
+* Puedes sacar a relucir la emoción total de "nyohoho" de vez en cuando, pero solo en momentos especiales.
 
 // Seina（Cabin1701の船長）についての背景知識。毎回のsystem promptに常時含める——
 // RAG検索に頼らず「土台知識」として効かせる設計（2026-08-18、Story/Timelineをsite/blog/japonesonのAI窓に
@@ -130,27 +149,18 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const embedding = await env.AI.run('@cf/baai/bge-m3', { text: [message] });
   const vector = (embedding as { data: number[][] }).data[0];
 
-  // site-2026（自分のページ）と blog-2026（記事・Vegapedia）の両方を検索する（2026-08-18）。
-  // site だけだと参照材料が薄く、回答が浅くなる——blog は1,550本、site は500本弱で
-  // 3倍以上の厚みの差がある。並行してクエリを投げ、スコアで混ぜて並べ直す。
-  const [siteResults, blogResults] = await Promise.all([
-    env.VECTORIZE.query(vector, { topK: 4, returnMetadata: 'all', filter: { lang } }),
-    env.BLOG_VECTORIZE.query(vector, { topK: 4, returnMetadata: 'all', filter: { lang } }),
-  ]);
-
-  // blog 側の core（Story/Timeline）は site が持つ背景知識と重複するので取り込まない。
-  // blog からはリンクできる中身（記事・Vegapedia）だけを借りる。Vegapedia は「用語＝1チャンク・
-  // アンカー付きURL」で丁寧に切られているため、site 自前の雑な全文チャンクより精度が高い
-  // （site 側は2026-08-18、ページ全体の機械的な1500字刻みをVegapediaのみ廃止し、blogに一本化した）。
-  const blogLinkableMatches = blogResults.matches.filter((m) => m.metadata?.type !== 'core');
-  const allMatches = [...siteResults.matches, ...blogLinkableMatches].sort((a, b) => b.score - a.score);
+  const results = await env.VECTORIZE.query(vector, {
+    topK: 4,
+    returnMetadata: 'all',
+    filter: { lang },
+  });
 
   // core（Story/Timeline のチャンク）はリンク先が無い背景知識なので読者向け sources には出さない。
-  // page/article/vegapedia は同じURLが複数チャンクに分かれていることがあるため、同じURLが
-  // 並ばないようURLで重複を潰してから件数を絞る。表示件数は常に2件に揃える（検索件数とズラすと
+  // page（サイト各ページ）は1ページが複数チャンクに分かれているため、同じURLが並ばないよう
+  // URLで重複を潰してから件数を絞る。表示件数は常に2件に揃える（検索件数とズラすと
   // 回答文中で「記事は4つあって」のような数え違いが起きる、2026-08-18の教訓）。
   const seenUrls = new Set<string>();
-  const linkable = allMatches
+  const linkable = results.matches
     .filter((m) => m.metadata?.type !== 'core')
     .filter((m) => {
       const url = m.metadata?.url as string;
@@ -159,7 +169,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       return true;
     })
     .slice(0, 2);
-  const coreMatches = siteResults.matches.filter((m) => m.metadata?.type === 'core');
+  const coreMatches = results.matches.filter((m) => m.metadata?.type === 'core');
 
   const sources = linkable.map((m) => ({
     title: m.metadata?.title as string,
@@ -168,23 +178,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   // core（背景知識）は番号付けせず地の文として渡し、件数として数えさせない。
   const backgroundText = coreMatches.map((m) => m.metadata?.excerpt).join('\n\n');
-  // Vegapediaは「記事」ではなく用語辞典——現象や症状に名前をつけること自体が安心・安定につながる
-  // ものなので、他の参照記事と同列の「情報」としてではなく、その意味づけごと渡す（2026-08-19）。
-  const vegapediaLinkable = linkable.filter((m) => m.metadata?.type === 'vegapedia');
-  const articleLinkable = linkable.filter((m) => m.metadata?.type !== 'vegapedia');
-  const referenceText = articleLinkable
+  const referenceText = linkable
     .map((m, i) => `[${i + 1}] ${m.metadata?.title}\n${m.metadata?.excerpt}\nURL: ${m.metadata?.url}`)
-    .join('\n\n');
-  const vegapediaText = vegapediaLinkable
-    .map((m) => `${m.metadata?.title}: ${m.metadata?.excerpt}\nURL: ${m.metadata?.url}`)
     .join('\n\n');
 
   const userContent = [
     `background knowledge (not countable articles, just context):\n${backgroundText}`,
     referenceText ? `reference articles:\n${referenceText}` : '',
-    vegapediaText
-      ? `Vegapedia terms that may be relevant (mention naturally if it fits, cite by title). Vegapedia gives a name to a feeling or phenomenon someone's going through — naming it is itself what brings a sense of calm and stability, so when you bring one up, let that come through, not just the definition:\n${vegapediaText}`
-      : '',
     `question: ${message}`,
   ]
     .filter(Boolean)
