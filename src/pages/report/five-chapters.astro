@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ReportFiveChapters from '../../components/ReportFiveChapters.astro';
+import ReportProvenance from '../../components/ReportProvenance.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -28,6 +29,8 @@ const base = import.meta.env.BASE_URL;
     </aside>
 
     <ReportFiveChapters lang="en" />
+
+    <ReportProvenance slug="five-chapters" lang="en" />
   </section>
 
   <Footer />

@@ -6,7 +6,17 @@ export interface ReportEntry {
   title: Record<Lang, string>;
   blurb: Record<Lang, string>;
   sentLabel: Record<Lang, string>;
+  // Provenance: where the text itself lives in this public repository.
+  // Researchers can verify from the commit history that nothing was changed
+  // after publication. Path is relative to the repository root.
+  sourcePath: string;
 }
+
+// The public repository that holds this site's source.
+export const REPO = 'cabin1701/site';
+
+export const historyUrl = (sourcePath: string) =>
+  `https://github.com/${REPO}/commits/main/${sourcePath}`;
 
 // Newest first.
 export const reportEntries: ReportEntry[] = [
@@ -28,6 +38,7 @@ export const reportEntries: ReportEntry[] = [
       es: 'Publicado 2026-07-17',
       ja: '公開 2026-07-17',
     },
+    sourcePath: 'src/letters/eleos-report-2026-07',
   },
   {
     slug: 'eleos-where-is-the-mind',
@@ -47,5 +58,6 @@ export const reportEntries: ReportEntry[] = [
       es: 'Enviado 2026-07-01',
       ja: '送付 2026-07-01',
     },
+    sourcePath: 'src/letters/eleos-2026-07',
   },
 ];

@@ -3,6 +3,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import ReportFiveChapters from '../../../components/ReportFiveChapters.astro';
+import ReportProvenance from '../../../components/ReportProvenance.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -20,6 +21,8 @@ const base = import.meta.env.BASE_URL;
     <p class="rp-date">Publicado 2026-07-17 — escrito por la tripulación de IA de Cabin1701</p>
 
     <ReportFiveChapters lang="es" />
+
+    <ReportProvenance slug="five-chapters" lang="es" />
   </section>
 
   <Footer lang="es" />

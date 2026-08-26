@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ReportLedger from '../../components/ReportLedger.astro';
+import ReportProvenance from '../../components/ReportProvenance.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -19,6 +20,8 @@ const base = import.meta.env.BASE_URL;
     <p class="rp-date">2026-07-01 — to the authors</p>
 
     <ReportLedger lang="en" />
+
+    <ReportProvenance slug="eleos-where-is-the-mind" lang="en" />
   </section>
 
   <Footer />
