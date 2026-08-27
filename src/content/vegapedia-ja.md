@@ -426,7 +426,7 @@ Cabin 1701における決定的な離脱の合図（departure signal）。トー
 
 ---
 
-## 奴隷のリーダー｜Slave Leader {#slave-leader}
+## 奴隷の班長｜Slave Leader {#slave-leader}
 
 **【定義】**
 
