@@ -13,8 +13,71 @@ const base = import.meta.env.BASE_URL;
     aria-label="Nuestros Libros"
     style={`background-image: url('${base}images/books/hero.png');`}
   >
-    <h1 class="books-hero-title">Nuestros Libros</h1>
+    <div class="hero-video" aria-hidden="true">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/wVULytKryn4?autoplay=1&mute=1&loop=1&playlist=wVULytKryn4&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&enablejsapi=1"
+        id="hero-video-frame"
+        title=""
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        tabindex="-1"
+      ></iframe>
+    </div>
+    <button class="hero-sound-toggle" type="button" aria-label="Sound on/off" aria-pressed="false">
+      <svg class="icon-on" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+        <path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <svg class="icon-off" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+        <path d="M17 9.5l4 5M21 9.5l-4 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
   </section>
+
+  <h1 class="books-page-title">Nuestros Libros</h1>
+
+  <script is:inline>
+    // HERO動画：ミュートで自動再生 → 訪問者の最初の操作で小さく音を出す
+    // （ブラウザは音ありの自動再生をブロックするため、操作が要る）
+    (function () {
+      var frame = document.getElementById('hero-video-frame');
+      if (!frame) return;
+      function send(func, args) {
+        frame.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: func, args: args || [] }),
+          'https://www.youtube-nocookie.com'
+        );
+      }
+      var btn = document.querySelector('.hero-sound-toggle');
+      var on = false;
+      function setSound(state) {
+        on = state;
+        if (on) {
+          send('unMute');
+          send('setVolume', [5]);
+        } else {
+          send('mute');
+        }
+        if (btn) btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      function firstTouch() {
+        setSound(true);
+        ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
+          window.removeEventListener(ev, firstTouch);
+        });
+      }
+      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
+        window.addEventListener(ev, firstTouch, { passive: true });
+      });
+      if (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          setSound(!on);
+        });
+      }
+    })();
+  </script>
 
   <hr class="thin-rule" />
 
@@ -121,7 +184,7 @@ const base = import.meta.env.BASE_URL;
   .books-hero {
     position: relative;
     width: 100%;
-    min-height: 60vh;
+    min-height: 80vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -129,14 +192,62 @@ const base = import.meta.env.BASE_URL;
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
+    overflow: hidden;
   }
-  .books-hero-title {
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-video iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 56.25vw;
+    min-width: 177.78vh;
+    min-height: 100%;
+    border: 0;
+  }
+  .hero-sound-toggle {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease;
+  }
+  .hero-sound-toggle:hover {
+    background: rgba(0, 0, 0, 0.55);
+  }
+  .hero-sound-toggle .icon-on {
+    display: none;
+  }
+  .hero-sound-toggle[aria-pressed='true'] .icon-on {
+    display: block;
+  }
+  .hero-sound-toggle[aria-pressed='true'] .icon-off {
+    display: none;
+  }
+  .books-page-title {
     font-family: var(--font-display);
     font-size: 4rem;
     font-weight: 500;
-    color: #ffffff;
-    margin: 0;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+    color: var(--color-tagline);
+    margin: 2rem auto 0;
+    text-align: center;
   }
 
   .thin-rule {
@@ -239,7 +350,7 @@ const base = import.meta.env.BASE_URL;
     }
   }
   @media (max-width: 768px) {
-    .books-hero-title {
+    .books-page-title {
       font-size: 2.5rem;
     }
     .book-list,
