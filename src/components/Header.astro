@@ -102,7 +102,7 @@ const langLinks = [
         <ul>
           {nav.map((item) => (
             <li class={item.children ? 'has-sub' : undefined}>
-              <a href={item.href}>{item.label}</a>
+              <a href={item.href}>{item.label}{item.children && <span class="caret"> ▾</span>}</a>
               {item.children && (
                 <ul class="subnav">
                   {item.children.map((child) => (
@@ -198,6 +198,12 @@ const langLinks = [
      JS は使わない——ヘッダーは全ページに出るので、動く部品を増やしたくない。 */
   .primary-nav li {
     position: relative;
+  }
+
+  .caret {
+    margin-left: 0.15rem;
+    font-size: 0.7em;
+    opacity: 0.6;
   }
 
   .subnav {
