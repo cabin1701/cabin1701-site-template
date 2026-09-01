@@ -252,19 +252,10 @@ const langLinks = [
       flex-wrap: wrap;
       gap: 1rem;
     }
-    /* 狭い画面では浮かせず、親の下に常時並べる（指で hover できないため） */
-    .subnav {
-      display: block;
-      position: static;
-      border: none;
-      box-shadow: none;
-      background: none;
-      padding: 0.2rem 0 0;
-    }
+    /* 狭い画面でも浮かせたまま出す。static にすると開きっぱなしになり、
+       ヘッダーが縦に伸びてしまうため（japoneson と同じ挙動に揃える）。 */
     .subnav a {
-      padding: 0.1rem 0 0.1rem 0.8rem;
       font-size: 0.95rem;
-      opacity: 0.85;
     }
   }
 </style>
