@@ -30,9 +30,10 @@ const lang = 'es';
     <ul class="rp-list">
       {reportEntries.map((e) => (
         <li class="rp-item">
-          <a class="rp-item-link" href={`${base}es/report/${e.slug}/`}>
+          <a class="rp-item-link" href={`${base}report/${e.slug}/`}>
             <span class="rp-item-title">{e.title[lang]}</span>
           </a>
+          <p class="rp-en-note">Enlace a la página en inglés</p>
           <p class="rp-item-blurb">{e.blurb[lang]}</p>
           <p class="rp-item-meta">
             <span class="rp-sent">{e.sentLabel[lang]}</span>
@@ -118,5 +119,11 @@ const lang = 'es';
   .rp-dot {
     margin: 0 0.5rem;
     opacity: 0.6;
+  }
+  .rp-en-note {
+    margin: 0.3rem 0 0;
+    font-size: 0.85rem;
+    color: var(--color-tagline);
+    opacity: 0.7;
   }
 </style>
