@@ -5,16 +5,16 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 
 const t = {
-  en: { heading: 'Latest Posts', author: 'Captain Seina', all: 'View all →', blog: 'https://blog.cabin1701.com/' },
-  es: { heading: 'Últimas entradas', author: 'Capitana Seina', all: 'Ver todo →', blog: 'https://blog.cabin1701.com/es/' },
-  ja: { heading: '最新の記事', author: 'Seina 船長', all: 'すべて見る →', blog: 'https://blog.cabin1701.com/ja/' },
+  en: { heading: 'Latest Posts', all: 'View all →', blog: 'https://blog.cabin1701.com/' },
+  es: { heading: 'Últimas entradas', all: 'Ver todo →', blog: 'https://blog.cabin1701.com/es/' },
+  ja: { heading: '最新の記事', all: 'すべて見る →', blog: 'https://blog.cabin1701.com/ja/' },
 }[lang];
 ---
 
 <section class="latest" aria-label={t.heading} data-lang={lang}>
   <div class="latest-inner">
     <h2 class="latest-title">{t.heading}</h2>
-    <div class="latest-grid" id="latest-grid" data-author={t.author}>
+    <div class="latest-grid" id="latest-grid">
       <p class="latest-empty" id="latest-empty" hidden></p>
     </div>
     <div class="latest-more">
@@ -27,7 +27,6 @@ const t = {
   (async function () {
     const grid = document.getElementById('latest-grid');
     if (!grid) return;
-    const author = grid.dataset.author || '';
     const fmtDate = (iso) => {
       const d = new Date(iso + 'T00:00:00');
       const mm = String(d.getMonth() + 1).padStart(2, '0');
@@ -47,10 +46,14 @@ const t = {
           const thumb = p.hero
             ? `<span class="latest-thumb"><img src="${esc(p.hero)}" alt="" loading="lazy" /></span>`
             : `<span class="latest-thumb latest-thumb--empty" aria-hidden="true"></span>`;
+          const category = Array.isArray(p.category) ? p.category.join(' / ') : '';
+          const metaCategory = category
+            ? `<span class="latest-category">${esc(category)}</span><span class="latest-sep">●</span>`
+            : '';
           return `<a class="latest-card" href="${esc(p.url)}">
             ${thumb}
             <span class="latest-card-title">${esc(p.title)}</span>
-            <span class="latest-meta"><span class="latest-author">${esc(author)}</span><span class="latest-sep">●</span><time datetime="${esc(p.date)}">${fmtDate(p.date)}</time></span>
+            <span class="latest-meta">${metaCategory}<time datetime="${esc(p.date)}">${fmtDate(p.date)}</time></span>
           </a>`;
         })
         .join('');
@@ -136,7 +139,7 @@ const t = {
     letter-spacing: 0.02em;
     color: var(--color-text);
   }
-  .latest-author { color: var(--color-magenta); }
+  .latest-category { color: var(--color-magenta); }
   .latest-sep { margin: 0 0.5rem; color: var(--color-magenta); opacity: 0.6; font-size: 0.6em; vertical-align: middle; }
 
   .latest-empty {
